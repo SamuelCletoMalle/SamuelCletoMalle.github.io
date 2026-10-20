@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="es" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Samuel Cleto Malle | Desarrollador de aplicaciones</title>
+<meta name="description" content="Portfolio de Samuel Cleto Malle, estudiante de 2º de DAM con base en sistemas y redes. Busco prácticas en proyectos IT reales.">
+<meta name="theme-color" content="#070b14">
+<meta property="og:title" content="Samuel Cleto Malle | Desarrollador de aplicaciones">
+<meta property="og:description" content="Estudiante de 2º de DAM con base en sistemas y redes. Busco prácticas en proyectos IT reales.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%235b9dff'/%3E%3Ctext x='32' y='43' font-family='Arial' font-weight='800' font-size='30' text-anchor='middle' fill='%2304122e'%3ESC%3C/text%3E%3C/svg%3E">
+<link rel="preload" href="assets/fonts/unbounded.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/geist.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="styles.css?v=12">
+<script>
+  /* Oscuro por defecto; solo cambia si el usuario eligió claro. Pantalla de carga salvo movimiento reducido */
+  (function () {
+    var r = document.documentElement, t = null;
+    try { t = localStorage.getItem('theme'); } catch (e) {}
+    r.setAttribute('data-theme', t === 'light' ? 'light' : 'dark');
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) r.classList.add('loading');
+  })();
+</script>
+</head>
+<body>
+<div class="loader" id="loader" aria-hidden="true">
+  <p class="loader__name">Samuel Cleto</p>
+  <div class="loader__bar"><i id="loader-bar"></i></div>
+  <p class="loader__pct" id="loader-pct">0%</p>
+</div>
+
+<a class="skip" href="#contenido" data-i18n="skip">Saltar al contenido</a>
+
+<header class="nav">
+  <div class="nav__pill">
+    <a class="brand" href="#inicio" aria-label="Samuel Cleto Malle">Samuel Cleto</a>
+    <nav class="nav__links" aria-label="Principal">
+      <a href="#experiencia" data-s="experiencia" data-i18n="nav_exp">Experiencia</a>
+      <a href="#formacion" data-s="formacion" data-i18n="nav_edu">Formación</a>
+      <a href="#proyectos" data-s="proyectos" data-i18n="nav_proj">Proyectos</a>
+      <a href="#stack" data-s="stack" data-i18n="nav_stack">Stack</a>
+    </nav>
+    <div class="nav__end">
+      <label class="sr" for="lang" data-i18n="lang_label">Idioma</label>
+      <select class="lang" id="lang">
+        <option value="es">ES</option>
+        <option value="en">EN</option>
+        <option value="fr">FR</option>
+        <option value="de">DE</option>
+      </select>
+      <button class="theme" id="theme" type="button" aria-label="Tema claro u oscuro">
+        <span data-for="dark" data-i18n="theme_light">Claro</span><span data-for="light" data-i18n="theme_dark">Oscuro</span>
+      </button>
+      <a class="btn btn--white" href="#contacto" data-i18n="nav_contact">Contactar</a>
+    </div>
+  </div>
+</header>
+
+<main id="contenido">
+
+  <!-- HERO -->
+  <section class="hero wrap" id="inicio">
+    <div class="hero__copy">
+      <h1 data-in>Samuel<br>Cleto Malle</h1>
+      <p class="hero__role" data-in data-i18n="role">Estudiante de DAM</p>
+      <p class="hero__sub" data-in data-i18n="hero_sub">Desarrollador con <strong>base sólida en sistemas y redes</strong>, centrado ahora en el desarrollo de aplicaciones multiplataforma. Busco <strong>prácticas por convenio</strong> en proyectos IT reales: procesos, desarrollo y control de calidad.</p>
+      <div class="hero__cta" data-in>
+        <button class="btn" id="copy" type="button"><span id="copy-t" data-i18n="copy">Copiar email</span></button>
+        <a class="btn btn--glass" href="https://github.com/SamuelCletoMalle" target="_blank" rel="noopener"><i class="ico" style="--i:url(https://cdn.simpleicons.org/github)"></i>GitHub</a>
+        <a class="btn btn--glass" href="https://www.linkedin.com/in/samuelcletomalle" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+      <p class="sr" id="copy-status" role="status" aria-live="polite"></p>
+    </div>
+
+    <figure class="photo" data-in>
+      <div class="photo__grid" aria-hidden="true"></div>
+      <ul class="photo__chips" aria-hidden="true">
+        <li class="c1"><i class="ico" style="--i:url(https://cdn.simpleicons.org/openjdk)"></i>Java</li>
+        <li class="c2"><i class="ico" style="--i:url(https://cdn.simpleicons.org/python)"></i>Python</li>
+        <li class="c3"><i class="ico" style="--i:url(https://cdn.simpleicons.org/typescript)"></i>TypeScript</li>
+        <li class="c4"><i class="ico" style="--i:url(https://cdn.simpleicons.org/git)"></i>Git</li>
+      </ul>
+      <div class="photo__frame">
+        <img class="photo__img" src="assets/foto.jpg?v=2" alt="Samuel Cleto Malle" width="1134" height="1387" fetchpriority="high">
+        <figcaption class="photo__cap">
+          <strong>Samuel Cleto Malle</strong>
+          <span data-i18n="loc">Leganés, España</span>
+        </figcaption>
+      </div>
+    </figure>
+  </section>
+
+  <!-- EXPERIENCIA -->
+  <section class="sec wrap" id="experiencia">
+    <div class="head reveal">
+      <div>
+        <p class="eyebrow" data-i18n="exp_eyebrow">Trayectoria profesional</p>
+        <h2 data-i18n="exp_h">Experiencia laboral</h2>
+      </div>
+      <p data-i18n="exp_p">Prácticas en soporte técnico, redes y sistemas, y mi primer trabajo en logística.</p>
+    </div>
+
+    <article class="xp reveal">
+      <div class="xp__top">
+        <div class="logo" aria-hidden="true">GEI</div>
+        <div class="xp__id">
+          <h3><span data-i18n="xp1_t">Técnico informático</span> <span class="badge">GEI Ciudad Escolar</span></h3>
+          <p class="mono">05/2025 - 06/2025 &nbsp; Madrid</p>
+        </div>
+        <div class="xp__side"><span class="pill" data-i18n="intern">Prácticas</span><span class="num">01</span></div>
+      </div>
+      <p class="xp__lead" data-i18n="xp1_l">Soporte y coordinación técnica en un centro de formación ambiental.</p>
+      <ul class="bul">
+        <li data-i18n="xp1_b1">Coordiné al equipo de técnicos informáticos durante el congreso CEP.</li>
+        <li data-i18n="xp1_b2">Mantenimiento preventivo y correctivo de hardware y software, con diagnóstico y reparación de equipos.</li>
+        <li data-i18n="xp1_b3">Soporte a usuarios y resolución de incidencias de sistemas.</li>
+        <li data-i18n="xp1_b4">Creación y gestión de las páginas web del centro.</li>
+      </ul>
+      <p class="tech"><span class="mono" data-i18n="tech_l">Tecnologías:</span><b data-i18n="tg_hw">Hardware</b><b data-i18n="tg_sys">Sistemas</b><b data-i18n="tg_sup">Soporte</b><b>Web</b></p>
+    </article>
+
+    <article class="xp reveal">
+      <div class="xp__top">
+        <div class="logo" aria-hidden="true">UNED</div>
+        <div class="xp__id">
+          <h3><span data-i18n="xp2_t">Técnico de sistemas</span> <span class="badge">UNED</span></h3>
+          <p class="mono">04/2024 - 06/2024 &nbsp; Madrid</p>
+        </div>
+        <div class="xp__side"><span class="pill" data-i18n="intern">Prácticas</span><span class="num">02</span></div>
+      </div>
+      <p class="xp__lead" data-i18n="xp2_l">Redes, servidores y help desk en la Universidad Nacional de Educación a Distancia.</p>
+      <ul class="bul">
+        <li data-i18n="xp2_b1">Configuración de redes y mantenimiento de servidores.</li>
+        <li data-i18n="xp2_b2">Soporte técnico a usuarios por teléfono y correo, y sustitución de componentes averiados.</li>
+        <li data-i18n="xp2_b3">Gestión de inventario y control de equipos informáticos.</li>
+      </ul>
+      <p class="tech"><span class="mono" data-i18n="tech_l">Tecnologías:</span><b data-i18n="tg_net">Redes</b><b data-i18n="tg_srv">Servidores</b><b>Help desk</b><b data-i18n="tg_inv">Inventario</b></p>
+    </article>
+
+    <article class="xp xp--minor reveal">
+      <div class="xp__top">
+        <div class="logo" aria-hidden="true">DEC</div>
+        <div class="xp__id">
+          <h3><span data-i18n="xp3_t">Operario de logística</span> <span class="badge">Decathlon</span></h3>
+          <p class="mono">06/2026 - 08/2026 &nbsp; Getafe</p>
+        </div>
+        <div class="xp__side"><span class="pill" data-i18n="summer">Verano</span><span class="num">03</span></div>
+      </div>
+      <p class="xp__lead" data-i18n="xp3_l">Preparación y expedición de pedidos, y formación de nuevos compañeros.</p>
+    </article>
+
+    <p class="note reveal" data-i18n="note">Fuera del trabajo técnico soy entrenador de baloncesto nivel 1 (FBM) y oficial de mesa en la Federación Madrileña, y he trabajado como auxiliar en eventos y conciertos.</p>
+  </section>
+
+  <!-- FORMACION -->
+  <section class="sec wrap" id="formacion">
+    <div class="head reveal">
+      <div>
+        <p class="eyebrow" data-i18n="edu_eyebrow">Trayectoria educativa</p>
+        <h2 data-i18n="edu_h">Formación académica</h2>
+      </div>
+      <p data-i18n="edu_p">Del mantenimiento de sistemas y redes al desarrollo de aplicaciones multiplataforma.</p>
+    </div>
+
+    <div class="grid3">
+      <article class="card reveal">
+        <span class="pill pill--on" data-i18n="ongoing">En curso</span>
+        <p class="mono" data-i18n="now_from">09/2026 - Actualidad</p>
+        <h3 data-i18n="ed1_t">Técnico Superior en DAM, 2º curso</h3>
+        <p class="org">Prometeo by thePower, Madrid</p>
+        <p class="card__p" data-i18n="ed1_p">Desarrollo de aplicaciones multiplataforma, con foco en proyectos reales.</p>
+      </article>
+      <article class="card reveal">
+        <span class="pill" data-i18n="done">Completado</span>
+        <p class="mono">09/2024 - 06/2026</p>
+        <h3 data-i18n="ed2_t">Técnico Superior en DAM, 1º curso</h3>
+        <p class="org">IES Luis Vives, Leganés</p>
+        <p class="card__p" data-i18n="ed2_p">Java, bases de datos con Oracle PL/SQL y lenguajes de marcas.</p>
+      </article>
+      <article class="card reveal">
+        <span class="pill" data-i18n="done">Completado</span>
+        <p class="mono">09/2022 - 06/2024</p>
+        <h3 data-i18n="ed3_t">Técnico en Sistemas Microinformáticos y Redes</h3>
+        <p class="org">Colegio Santa María de los Apóstoles, Madrid</p>
+        <p class="card__p" data-i18n="ed3_p">Sistemas operativos, redes y mantenimiento de equipos y servidores.</p>
+      </article>
+    </div>
+
+    <h3 class="sub reveal" data-i18n="cert_h">Certificaciones técnicas</h3>
+    <div class="certs">
+      <article class="card card--cert reveal"><p class="mono">10/2026</p><h4>AWS Cloud Practitioner Essentials</h4><p class="org">Amazon Web Services</p></article>
+      <article class="card card--cert reveal"><p class="mono">09 / 10 - 2026</p><h4>Python Essentials 1 / 2</h4><p class="org">Cisco Networking Academy, OpenEDG Python Institute</p></article>
+      <article class="card card--cert reveal"><p class="mono">10/2026</p><h4 data-i18n="c3_t">Introducción a la IA moderna</h4><p class="org">Cisco Networking Academy</p></article>
+      <article class="card card--cert reveal"><p class="mono">10/2026</p><h4>Build Your First Chatbot</h4><p class="org">IBM SkillsBuild</p></article>
+      <article class="card card--cert reveal"><p class="mono">03/2026</p><h4 data-i18n="c5_t">Desarrollo con IA: de 0 a Producción</h4><p class="org">BIG school</p></article>
+      <article class="card card--cert card--lang reveal"><p class="mono" data-i18n="langs">Idiomas</p><h4 data-i18n="lang_es">Español nativo</h4><p class="org" data-i18n="lang_en">Inglés A2</p></article>
+    </div>
+  </section>
+
+  <!-- PROYECTOS -->
+  <section class="sec wrap" id="proyectos">
+    <div class="head reveal">
+      <div>
+        <p class="eyebrow" data-i18n="proj_eyebrow">Mis proyectos personales</p>
+        <h2 data-i18n="proj_h">Proyectos destacados</h2>
+      </div>
+      <p data-i18n="proj_p">Desarrollos propios, con foco en arquitectura, decisiones de diseño y código abierto.</p>
+    </div>
+
+    <div class="duo">
+      <article class="proj reveal">
+        <div class="proj__visual proj__visual--balanz">
+          <img src="assets/balanz-icon.png" width="220" height="220" alt="Balanz" loading="lazy">
+        </div>
+        <div class="proj__body">
+          <p class="mono" data-i18n="p1_k">App móvil y web</p>
+          <h3>Balanz <span class="pill pill--on" data-i18n="live">En producción</span></h3>
+          <p data-i18n="p1_d">App de control de gastos e ingresos para iOS, Android y web con una sola base de código. Incluye sincronización en la nube, cuentas separadas por usuario y funcionamiento sin conexión.</p>
+          <p class="tech"><b>React Native</b><b>Expo</b><b>TypeScript</b><b>Supabase</b></p>
+          <div class="proj__links">
+            <a class="btn btn--sm" href="https://balanz-app.vercel.app" target="_blank" rel="noopener" data-i18n="try_web">Probar la web</a>
+            <a class="btn btn--glass btn--sm" href="https://github.com/SamuelCletoMalle/Balanz-App" target="_blank" rel="noopener" data-i18n="source">Código fuente</a>
+          </div>
+        </div>
+      </article>
+      <article class="proj reveal">
+        <div class="proj__visual proj__visual--teal" aria-hidden="true"><span>WEB</span></div>
+        <div class="proj__body">
+          <p class="mono" data-i18n="p2_k">Web, reservas y agente IA</p>
+          <h3 data-i18n="p2_t">Web de reservas con agente IA</h3>
+          <p data-i18n="p2_d">Web y sistema de reservas para un negocio de servicios: reserva en 4 pasos sin dobles citas, panel de administración y un chat con IA que comparte agenda con WhatsApp y voz.</p>
+          <p class="tech"><b>Next.js</b><b>React</b><b>TypeScript</b><b>Claude API</b></p>
+        </div>
+      </article>
+    </div>
+
+    <div class="duo duo--one">
+      <article class="proj proj--wide reveal">
+        <div class="proj__visual proj__visual--blue" aria-hidden="true"><span>DAM</span></div>
+        <div class="proj__body">
+          <p class="mono">GitHub</p>
+          <h3 data-i18n="strip_t">Ejercicios y prácticas del ciclo DAM</h3>
+          <p data-i18n="strip_d">Java, bases de datos con PL/SQL y lenguajes de marcas, en GitHub.</p>
+          <p class="tech"><b>Java</b><b>Oracle PL/SQL</b><b>HTML</b><b>Git</b></p>
+          <div class="proj__links">
+            <a class="btn btn--glass btn--sm" href="https://github.com/SamuelCletoMalle/DAM" target="_blank" rel="noopener" data-i18n="source">Código fuente</a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- STACK -->
+  <section class="sec wrap" id="stack">
+    <div class="head reveal">
+      <div>
+        <p class="eyebrow" data-i18n="stack_eyebrow">Mis capacidades</p>
+        <h2 data-i18n="stack_h">Stack técnico</h2>
+      </div>
+      <p data-i18n="stack_p">Tecnologías y herramientas con las que desarrollo proyectos y resuelvo problemas.</p>
+    </div>
+
+    <div class="marquee reveal" aria-hidden="true">
+      <ul class="marquee__track">
+        <li><i class="ico" style="--i:url(https://cdn.simpleicons.org/openjdk)"></i>Java</li>
+        <li><i class="ico" style="--i:url(https://cdn.simpleicons.org/python)"></i>Python</li>
+        <li><i class="ico" style="--i:url(https://cdn.simpleicons.org/javascript)"></i>JavaScript</li>
+        <li><i class="ico" style="--i:url(https://cdn.simpleicons.org/typescript)"></i>TypeScript</li>
+        <li><i class="ico" style="--i:url(https://cdn.simpleicons.org/react)"></i>React</li>
+        <li><i class="ico" style="--i:url(https://cdn.simpleicons.org/expo)"></i>Expo</li>
+        <li><i class="ico" style="--i:url(https://cdn.simpleicons.org/supabase)"></i>Supabase</li>
+        <li><i class="ico" style="--i:url(https://cdn.simpleicons.org/git)"></i>Git</li>
+        <li><i class="ico" style="--i:url(https://cdn.simpleicons.org/github)"></i>GitHub</li>
+        <li><i class="ico" style="--i:url(https://cdn.simpleicons.org/linux)"></i>Linux</li>
+        <li><i class="ico" style="--i:url(https://cdn.simpleicons.org/openjdk)"></i>Java</li>
+        <li><i class="ico" style="--i:url(https://cdn.simpleicons.org/python)"></i>Python</li>
+        <li><i class="ico" style="--i:url(https://cdn.simpleicons.org/javascript)"></i>JavaScript</li>
+        <li><i class="ico" style="--i:url(https://cdn.simpleicons.org/typescript)"></i>TypeScript</li>
+        <li><i class="ico" style="--i:url(https://cdn.simpleicons.org/react)"></i>React</li>
+        <li><i class="ico" style="--i:url(https://cdn.simpleicons.org/expo)"></i>Expo</li>
+        <li><i class="ico" style="--i:url(https://cdn.simpleicons.org/supabase)"></i>Supabase</li>
+        <li><i class="ico" style="--i:url(https://cdn.simpleicons.org/git)"></i>Git</li>
+        <li><i class="ico" style="--i:url(https://cdn.simpleicons.org/github)"></i>GitHub</li>
+        <li><i class="ico" style="--i:url(https://cdn.simpleicons.org/linux)"></i>Linux</li>
+      </ul>
+    </div>
+
+    <div class="grid3 stack">
+      <article class="card reveal">
+        <h3><span data-i18n="s1_h">Lenguajes</span> <span class="count">6</span></h3>
+        <ul class="skills">
+          <li><i class="ico" style="--i:url(https://cdn.simpleicons.org/openjdk)"></i>Java</li>
+          <li><i class="ico" style="--i:url(https://cdn.simpleicons.org/python)"></i>Python</li>
+          <li><i class="ico" style="--i:url(https://cdn.simpleicons.org/javascript)"></i>JavaScript</li>
+          <li><i class="ico" style="--i:url(https://cdn.simpleicons.org/typescript)"></i>TypeScript</li>
+          <li><i class="ico" style="--i:url(https://cdn.simpleicons.org/sqlite)"></i>SQL y Oracle PL/SQL</li>
+          <li><i class="ico" style="--i:url(https://cdn.simpleicons.org/html5)"></i>HTML y CSS</li>
+        </ul>
+      </article>
+      <article class="card reveal">
+        <h3><span data-i18n="s2_h">Apps y web</span> <span class="count">3</span></h3>
+        <ul class="skills">
+          <li><i class="ico" style="--i:url(https://cdn.simpleicons.org/react)"></i>React y React Native</li>
+          <li><i class="ico" style="--i:url(https://cdn.simpleicons.org/expo)"></i>Expo</li>
+          <li><i class="ico" style="--i:url(https://cdn.simpleicons.org/supabase)"></i>Supabase</li>
+        </ul>
+      </article>
+      <article class="card reveal">
+        <h3><span data-i18n="s3_h">Sistemas y herramientas</span> <span class="count">5</span></h3>
+        <ul class="skills">
+          <li><i class="ico" style="--i:url(https://cdn.simpleicons.org/git)"></i>Git y GitHub</li>
+          <li><i class="ico" style="--i:url(https://cdn.simpleicons.org/linux)"></i><span data-i18n="s3_a">Redes y servidores</span></li>
+          <li class="plain">AWS Cloud Practitioner</li>
+          <li class="plain" data-i18n="s3_b">Soporte técnico y help desk</li>
+          <li class="plain" data-i18n="s3_c">Diagnóstico de hardware</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section class="sec wrap" id="contacto">
+    <div class="cta reveal">
+      <h2 data-i18n="cta_h">¿Tienes unas prácticas en mente?</h2>
+      <p data-i18n="cta_p">Cuéntame qué proyecto tenéis y qué necesitáis. Te contesto lo antes posible.</p>
+      <a class="mail" href="mailto:samuelcletomalle@gmail.com">samuelcletomalle@gmail.com</a>
+    </div>
+  </section>
+</main>
+
+<footer class="foot wrap">
+  <p>© 2026 Samuel Cleto Malle</p>
+  <a href="#inicio" data-i18n="top">Volver arriba</a>
+</footer>
+
+<script src="i18n.js?v=12" defer></script>
+<script src="main.js?v=12" defer></script>
+</body>
+</html>
