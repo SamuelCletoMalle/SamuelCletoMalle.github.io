@@ -12,7 +12,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%235b9dff'/%3E%3Ctext x='32' y='43' font-family='Arial' font-weight='800' font-size='30' text-anchor='middle' fill='%2304122e'%3ESC%3C/text%3E%3C/svg%3E">
 <link rel="preload" href="assets/fonts/unbounded.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/geist.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="styles.css?v=14">
+<link rel="stylesheet" href="styles.css?v=15">
 <script>
   /* Oscuro por defecto; solo cambia si el usuario eligió claro. Pantalla de carga salvo movimiento reducido */
   (function () {
@@ -55,6 +55,7 @@
     <nav class="nav__links" aria-label="Principal">
       <span class="nav__ind" id="nav-ind" aria-hidden="true"></span>
       <a href="#proyectos" data-s="proyectos" data-i18n="nav_proj">Proyectos</a>
+      <a href="#ahora" data-s="ahora" data-i18n="nav_now">Ahora</a>
       <a href="#experiencia" data-s="experiencia" data-i18n="nav_exp">Experiencia</a>
       <a href="#formacion" data-s="formacion" data-i18n="nav_edu">Formación</a>
       <a href="#stack" data-s="stack" data-i18n="nav_stack">Stack</a>
@@ -114,9 +115,9 @@
         <ul class="stats">
           <li><b data-count="2" data-suffix="º">2º</b><span data-i18n="st1">curso de DAM</span></li>
           <li><b data-count="2">2</b><span data-i18n="st2">prácticas en empresa</span></li>
-          <li><b data-count="6">6</b><span data-i18n="st3">certificaciones</span></li>
+          <li><b data-count="8">8</b><span data-i18n="st3">certificaciones</span></li>
         </ul>
-        <p class="loc"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></svg><span data-i18n="loc">Leganés, España</span></p>
+        <p class="loc"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></svg><span data-i18n="loc">Leganés, España</span><span class="clock" id="clock" aria-label="Hora local"></span></p>
       </div>
 
       <div class="tile glass tile--marquee" data-in aria-hidden="true">
@@ -203,6 +204,37 @@
     </div>
   </section>
 
+  <!-- AHORA MISMO -->
+  <section class="sec wrap" id="ahora">
+    <div class="head reveal">
+      <div>
+        <p class="eyebrow" data-i18n="now_eyebrow">Octubre 2026</p>
+        <h2 class="split" data-i18n="now_h">Ahora mismo</h2>
+      </div>
+      <p data-i18n="now_p">En qué estoy centrado estos meses y cuándo puedo empezar.</p>
+    </div>
+    <div class="now">
+      <article class="card glass now__card reveal">
+        <span class="now__ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5v-15Z"/><path d="M4 20.5A2.5 2.5 0 0 0 6.5 23H20v-5"/></svg></span>
+        <p class="label" data-i18n="now1_k">Estudiando</p>
+        <h3 data-i18n="now1_t">2º de DAM en Prometeo by thePower</h3>
+        <p class="card__p" data-i18n="now1_p">Desarrollo de aplicaciones multiplataforma, con proyectos reales durante el curso.</p>
+      </article>
+      <article class="card glass now__card reveal">
+        <span class="now__ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 7-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/></svg></span>
+        <p class="label" data-i18n="now2_k">Aprendiendo</p>
+        <h3 data-i18n="now2_t">JavaScript Essentials 2</h3>
+        <p class="card__p" data-i18n="now2_p">Y llevando Balanz de web a app nativa para publicarla en Play Store y App Store.</p>
+      </article>
+      <article class="card glass now__card now__card--avail reveal">
+        <span class="now__ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+        <p class="label" data-i18n="now3_k">Disponibilidad</p>
+        <h3 data-i18n="now3_t">4 h al día, jornada completa desde marzo</h3>
+        <p class="card__p" data-i18n="now3_p">Compatible con las clases ahora, y a tiempo completo para las prácticas de empresa.</p>
+      </article>
+    </div>
+  </section>
+
   <!-- EXPERIENCIA -->
   <section class="sec wrap" id="experiencia">
     <div class="head reveal">
@@ -213,58 +245,65 @@
       <p data-i18n="exp_p">Prácticas en soporte técnico, redes y sistemas, y mi primer trabajo en logística.</p>
     </div>
 
-    <div class="xps">
-      <article class="xp glass reveal">
-        <div class="xp__top">
-          <div class="logo" aria-hidden="true">GEI</div>
-          <div class="xp__id">
-            <h3 data-i18n="xp1_t">Técnico informático</h3>
-            <p class="org">GEI Ciudad Escolar</p>
+    <ol class="tl">
+      <li class="tl__item reveal">
+        <div class="tl__when"><span class="tl__year">2026</span><span class="mono">06 - 08/2026</span></div>
+        <article class="xp xp--minor glass">
+          <div class="xp__top">
+            <div class="logo" aria-hidden="true">DEC</div>
+            <div class="xp__id">
+              <h3 data-i18n="xp3_t">Operario de logística</h3>
+              <p class="org">Decathlon <span class="mono">· Getafe</span></p>
+            </div>
+            <span class="pill" data-i18n="summer">Verano</span>
           </div>
-          <span class="pill" data-i18n="intern">Prácticas</span>
-        </div>
-        <p class="mono xp__date">05/2025 - 06/2025 · Madrid</p>
-        <p class="xp__lead" data-i18n="xp1_l">Soporte y coordinación técnica en un centro de formación ambiental.</p>
-        <ul class="bul">
-          <li data-i18n="xp1_b1">Coordiné al equipo de técnicos informáticos durante el congreso CEP.</li>
-          <li data-i18n="xp1_b2">Mantenimiento preventivo y correctivo de hardware y software, con diagnóstico y reparación de equipos.</li>
-          <li data-i18n="xp1_b3">Soporte a usuarios y resolución de incidencias de sistemas.</li>
-          <li data-i18n="xp1_b4">Creación y gestión de las páginas web del centro.</li>
-        </ul>
-        <p class="tech"><b data-i18n="tg_hw">Hardware</b><b data-i18n="tg_sys">Sistemas</b><b data-i18n="tg_sup">Soporte</b><b>Web</b></p>
-      </article>
+          <p class="xp__lead" data-i18n="xp3_l">Preparación y expedición de pedidos, y formación de nuevos compañeros.</p>
+        </article>
+      </li>
 
-      <article class="xp glass reveal">
-        <div class="xp__top">
-          <div class="logo" aria-hidden="true">UNED</div>
-          <div class="xp__id">
-            <h3 data-i18n="xp2_t">Técnico de sistemas</h3>
-            <p class="org">UNED</p>
+      <li class="tl__item reveal">
+        <div class="tl__when"><span class="tl__year">2025</span><span class="mono">05 - 06/2025</span></div>
+        <article class="xp glass">
+          <div class="xp__top">
+            <div class="logo" aria-hidden="true">GEI</div>
+            <div class="xp__id">
+              <h3 data-i18n="xp1_t">Técnico informático</h3>
+              <p class="org">GEI Ciudad Escolar <span class="mono">· Madrid</span></p>
+            </div>
+            <span class="pill" data-i18n="intern">Prácticas</span>
           </div>
-          <span class="pill" data-i18n="intern">Prácticas</span>
-        </div>
-        <p class="mono xp__date">04/2024 - 06/2024 · Madrid</p>
-        <p class="xp__lead" data-i18n="xp2_l">Redes, servidores y help desk en la Universidad Nacional de Educación a Distancia.</p>
-        <ul class="bul">
-          <li data-i18n="xp2_b1">Configuración de redes y mantenimiento de servidores.</li>
-          <li data-i18n="xp2_b2">Soporte técnico a usuarios por teléfono y correo, y sustitución de componentes averiados.</li>
-          <li data-i18n="xp2_b3">Gestión de inventario y control de equipos informáticos.</li>
-        </ul>
-        <p class="tech"><b data-i18n="tg_net">Redes</b><b data-i18n="tg_srv">Servidores</b><b>Help desk</b><b data-i18n="tg_inv">Inventario</b></p>
-      </article>
+          <p class="xp__lead" data-i18n="xp1_l">Soporte y coordinación técnica en un centro de formación ambiental.</p>
+          <ul class="bul">
+            <li data-i18n="xp1_b1">Coordiné al equipo de técnicos informáticos durante el congreso CEP.</li>
+            <li data-i18n="xp1_b2">Mantenimiento preventivo y correctivo de hardware y software, con diagnóstico y reparación de equipos.</li>
+            <li data-i18n="xp1_b3">Soporte a usuarios y resolución de incidencias de sistemas.</li>
+            <li data-i18n="xp1_b4">Creación y gestión de las páginas web del centro.</li>
+          </ul>
+          <p class="tech"><b data-i18n="tg_hw">Hardware</b><b data-i18n="tg_sys">Sistemas</b><b data-i18n="tg_sup">Soporte</b><b>Web</b></p>
+        </article>
+      </li>
 
-      <article class="xp xp--minor glass reveal">
-        <div class="xp__top">
-          <div class="logo" aria-hidden="true">DEC</div>
-          <div class="xp__id">
-            <h3 data-i18n="xp3_t">Operario de logística</h3>
-            <p class="org">Decathlon <span class="mono">· 06/2026 - 08/2026 · Getafe</span></p>
+      <li class="tl__item reveal">
+        <div class="tl__when"><span class="tl__year">2024</span><span class="mono">04 - 06/2024</span></div>
+        <article class="xp glass">
+          <div class="xp__top">
+            <div class="logo" aria-hidden="true">UNED</div>
+            <div class="xp__id">
+              <h3 data-i18n="xp2_t">Técnico de sistemas</h3>
+              <p class="org">UNED <span class="mono">· Madrid</span></p>
+            </div>
+            <span class="pill" data-i18n="intern">Prácticas</span>
           </div>
-          <span class="pill" data-i18n="summer">Verano</span>
-        </div>
-        <p class="xp__lead" data-i18n="xp3_l">Preparación y expedición de pedidos, y formación de nuevos compañeros.</p>
-      </article>
-    </div>
+          <p class="xp__lead" data-i18n="xp2_l">Redes, servidores y help desk en la Universidad Nacional de Educación a Distancia.</p>
+          <ul class="bul">
+            <li data-i18n="xp2_b1">Configuración de redes y mantenimiento de servidores.</li>
+            <li data-i18n="xp2_b2">Soporte técnico a usuarios por teléfono y correo, y sustitución de componentes averiados.</li>
+            <li data-i18n="xp2_b3">Gestión de inventario y control de equipos informáticos.</li>
+          </ul>
+          <p class="tech"><b data-i18n="tg_net">Redes</b><b data-i18n="tg_srv">Servidores</b><b>Help desk</b><b data-i18n="tg_inv">Inventario</b></p>
+        </article>
+      </li>
+    </ol>
 
     <p class="note reveal" data-i18n="note">Fuera del trabajo técnico soy entrenador de baloncesto nivel 1 (FBM) y oficial de mesa en la Federación Madrileña, y he trabajado como auxiliar en eventos y conciertos.</p>
   </section>
@@ -307,6 +346,8 @@
     <div class="certs">
       <article class="card glass card--cert reveal"><p class="mono">10/2026</p><h4>AWS Cloud Practitioner Essentials</h4><p class="org">Amazon Web Services</p></article>
       <article class="card glass card--cert reveal"><p class="mono">09 / 10 - 2026</p><h4>Python Essentials 1 / 2</h4><p class="org">Cisco Networking Academy, OpenEDG Python Institute</p></article>
+      <article class="card glass card--cert reveal"><p class="mono">10/2026</p><h4>AWS Technical Essentials</h4><p class="org">Amazon Web Services</p></article>
+      <article class="card glass card--cert reveal"><p class="mono">10/2026</p><h4>JavaScript Essentials 1</h4><p class="org">Cisco Networking Academy, OpenEDG JS Institute</p></article>
       <article class="card glass card--cert reveal"><p class="mono">10/2026</p><h4 data-i18n="c3_t">Introducción a la IA moderna</h4><p class="org">Cisco Networking Academy</p></article>
       <article class="card glass card--cert reveal"><p class="mono">10/2026</p><h4>Build Your First Chatbot</h4><p class="org">IBM SkillsBuild</p></article>
       <article class="card glass card--cert reveal"><p class="mono">03/2026</p><h4 data-i18n="c5_t">Desarrollo con IA: de 0 a Producción</h4><p class="org">BIG school</p></article>
@@ -356,6 +397,35 @@
     </div>
   </section>
 
+  <!-- PREGUNTAS -->
+  <section class="sec wrap" id="faq">
+    <div class="head reveal">
+      <div>
+        <p class="eyebrow" data-i18n="faq_eyebrow">Para empresas</p>
+        <h2 class="split" data-i18n="faq_h">Preguntas frecuentes</h2>
+      </div>
+      <p data-i18n="faq_p">Lo que suelen preguntarme antes de una entrevista de prácticas.</p>
+    </div>
+    <div class="faqs">
+      <details class="faq glass reveal">
+        <summary><span data-i18n="q1">¿Puedes hacer prácticas por convenio?</span><i aria-hidden="true"></i></summary>
+        <p data-i18n="a1">Sí. Las hago a través de Prometeo by thePower como parte del 2º curso de DAM, así que el convenio lo gestiona el centro.</p>
+      </details>
+      <details class="faq glass reveal">
+        <summary><span data-i18n="q2">¿Qué horario tienes?</span><i aria-hidden="true"></i></summary>
+        <p data-i18n="a2">Ahora puedo unas 4 horas al día compatibles con las clases, y a partir de marzo, jornada completa.</p>
+      </details>
+      <details class="faq glass reveal">
+        <summary><span data-i18n="q3">¿Qué tipo de prácticas buscas?</span><i aria-hidden="true"></i></summary>
+        <p data-i18n="a3">De desarrollo: aplicaciones, web o backend. Busco un equipo donde aprender y aportar desde el primer día, y si encajo, quedarme después.</p>
+      </details>
+      <details class="faq glass reveal">
+        <summary><span data-i18n="q4">¿Dónde puedes trabajar?</span><i aria-hidden="true"></i></summary>
+        <p data-i18n="a4">Prefiero la zona sur de Madrid (Leganés o Getafe). Tengo carnet B y coche propio.</p>
+      </details>
+    </div>
+  </section>
+
   <!-- CONTACTO -->
   <section class="sec wrap" id="contacto">
     <div class="cta glass reveal">
@@ -374,12 +444,21 @@
   </section>
 </main>
 
+<dialog class="cmdk glass" id="cmdk" aria-label="Paleta de comandos">
+  <form method="dialog" class="cmdk__box">
+    <input class="cmdk__in" id="cmdk-in" type="text" autocomplete="off" spellcheck="false" placeholder="Buscar secciones y acciones..." data-i18n-ph="cmd_ph">
+    <ul class="cmdk__list" id="cmdk-list" role="listbox"></ul>
+    <p class="cmdk__hint mono"><kbd>↑</kbd><kbd>↓</kbd> <span data-i18n="cmd_nav">navegar</span> · <kbd>Enter</kbd> <span data-i18n="cmd_go">abrir</span> · <kbd>Esc</kbd> <span data-i18n="cmd_close">cerrar</span></p>
+  </form>
+</dialog>
+
 <footer class="foot wrap">
   <p>© 2026 Samuel Cleto Malle</p>
+  <button class="foot__cmd mono" id="cmdk-open" type="button"><kbd>Ctrl</kbd><kbd>K</kbd> <span data-i18n="cmd_hint">atajos</span></button>
   <a href="#inicio" data-i18n="top">Volver arriba</a>
 </footer>
 
-<script src="i18n.js?v=14" defer></script>
-<script src="main.js?v=14" defer></script>
+<script src="i18n.js?v=15" defer></script>
+<script src="main.js?v=15" defer></script>
 </body>
 </html>
