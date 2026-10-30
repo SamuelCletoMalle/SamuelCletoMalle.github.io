@@ -80,10 +80,10 @@ window.I18N = {
     "_status_fail": "Could not copy the email",
     "nav_about": "Introduction",
     "avail": "Available for internships (work-placement agreement)",
-    "st1": "DAM year",
+    "st1": "year of DAM",
     "st2": "company internships",
     "st3": "certifications",
-    "contact_k": "Get in touch",
+    "contact_k": "Write to me",
     "see_proj": "View projects",
     "exp_eyebrow": "Professional background",
     "exp_p": "Internships in technical support, networks and systems, and my first job in logistics.",
@@ -95,7 +95,11 @@ window.I18N = {
     "stack_p": "Technologies and tools I use to build projects and solve problems.",
     "p2_k": "Web, bookings and AI agent",
     "p2_t": "Booking website with AI agent",
-    "p2_d": "Website and booking system for a service business: 4-step booking without double bookings, an admin panel and an AI chat that shares its calendar with WhatsApp and voice."
+    "p2_d": "Website and booking system for a service business: 4-step booking without double bookings, an admin panel and an AI chat that shares its calendar with WhatsApp and voice.",
+    "h1_a": "I build",
+    "h1_b": "cross-platform apps",
+    "talk": "Let's talk",
+    "fig_k": "In numbers"
   },
   "fr": {
     "skip": "Aller au contenu",
@@ -192,7 +196,11 @@ window.I18N = {
     "stack_p": "Technologies et outils que j'utilise pour développer des projets et résoudre des problèmes.",
     "p2_k": "Web, réservations et agent IA",
     "p2_t": "Site de réservation avec agent IA",
-    "p2_d": "Site web et système de réservation pour une entreprise de services : réservation en 4 étapes sans double réservation, panneau d'administration et chat IA qui partage son agenda avec WhatsApp et la voix."
+    "p2_d": "Site web et système de réservation pour une entreprise de services : réservation en 4 étapes sans double réservation, panneau d'administration et chat IA qui partage son agenda avec WhatsApp et la voix.",
+    "h1_a": "Je développe des apps",
+    "h1_b": "multiplateformes",
+    "talk": "Parlons-en",
+    "fig_k": "En chiffres"
   },
   "de": {
     "skip": "Zum Inhalt springen",
@@ -289,6 +297,10 @@ window.I18N = {
     "stack_p": "Technologien und Werkzeuge, mit denen ich Projekte umsetze und Probleme löse.",
     "p2_k": "Web, Buchungen und KI-Agent",
     "p2_t": "Buchungswebsite mit KI-Agent",
-    "p2_d": "Website und Buchungssystem für einen Dienstleistungsbetrieb: Buchung in 4 Schritten ohne Doppelbuchungen, Admin-Bereich und ein KI-Chat, der seinen Kalender mit WhatsApp und Sprache teilt."
+    "p2_d": "Website und Buchungssystem für einen Dienstleistungsbetrieb: Buchung in 4 Schritten ohne Doppelbuchungen, Admin-Bereich und ein KI-Chat, der seinen Kalender mit WhatsApp und Sprache teilt.",
+    "h1_a": "Ich entwickle",
+    "h1_b": "Cross-Platform-Apps",
+    "talk": "Lass uns reden",
+    "fig_k": "In Zahlen"
   }
 };
