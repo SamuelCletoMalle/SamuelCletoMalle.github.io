@@ -99,7 +99,9 @@ window.I18N = {
     "h1_a": "I build",
     "h1_b": "cross-platform apps",
     "talk": "Let's talk",
-    "fig_k": "In numbers"
+    "fig_k": "In numbers",
+    "about_k": "About me",
+    "manifest": "I started out building and repairing computers. Today I build the apps that run on them, and I want to keep learning inside a real team."
   },
   "fr": {
     "skip": "Aller au contenu",
@@ -200,7 +202,9 @@ window.I18N = {
     "h1_a": "Je développe des apps",
     "h1_b": "multiplateformes",
     "talk": "Parlons-en",
-    "fig_k": "En chiffres"
+    "fig_k": "En chiffres",
+    "about_k": "À propos",
+    "manifest": "J'ai commencé par monter et réparer des ordinateurs. Aujourd'hui, je crée les applications qui tournent dessus, et je veux continuer à apprendre au sein d'une vraie équipe."
   },
   "de": {
     "skip": "Zum Inhalt springen",
@@ -301,6 +305,8 @@ window.I18N = {
     "h1_a": "Ich entwickle",
     "h1_b": "Cross-Platform-Apps",
     "talk": "Lass uns reden",
-    "fig_k": "In Zahlen"
+    "fig_k": "In Zahlen",
+    "about_k": "Über mich",
+    "manifest": "Angefangen habe ich mit dem Bauen und Reparieren von Computern. Heute entwickle ich die Apps, die darauf laufen, und möchte in einem echten Team weiterlernen."
   }
 };

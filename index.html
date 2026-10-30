@@ -12,7 +12,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%235b9dff'/%3E%3Ctext x='32' y='43' font-family='Arial' font-weight='800' font-size='30' text-anchor='middle' fill='%2304122e'%3ESC%3C/text%3E%3C/svg%3E">
 <link rel="preload" href="assets/fonts/unbounded.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/geist.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="styles.css?v=13">
+<link rel="stylesheet" href="styles.css?v=14">
 <script>
   /* Oscuro por defecto; solo cambia si el usuario eligió claro. Pantalla de carga salvo movimiento reducido */
   (function () {
@@ -45,12 +45,15 @@
   <p class="loader__pct" id="loader-pct">0%</p>
 </div>
 
+<div class="progress" aria-hidden="true"><i id="progress"></i></div>
+
 <a class="skip" href="#contenido" data-i18n="skip">Saltar al contenido</a>
 
 <header class="nav">
   <div class="nav__pill glass glass--refract">
     <a class="brand" href="#inicio" aria-label="Samuel Cleto Malle"><span class="brand__mark">SC</span><span class="brand__name">Samuel Cleto</span></a>
     <nav class="nav__links" aria-label="Principal">
+      <span class="nav__ind" id="nav-ind" aria-hidden="true"></span>
       <a href="#proyectos" data-s="proyectos" data-i18n="nav_proj">Proyectos</a>
       <a href="#experiencia" data-s="experiencia" data-i18n="nav_exp">Experiencia</a>
       <a href="#formacion" data-s="formacion" data-i18n="nav_edu">Formación</a>
@@ -89,7 +92,7 @@
 
       <div class="tile glass tile--intro" data-in>
         <p class="status"><i class="status__dot"></i><span data-i18n="avail">Disponible para prácticas por convenio</span></p>
-        <h1><span data-i18n="h1_a">Desarrollo apps</span><br><span class="grad" data-i18n="h1_b">multiplataforma</span></h1>
+        <h1><span data-i18n="h1_a">Desarrollo apps</span><br><span class="grad" id="scramble" data-i18n="h1_b">multiplataforma</span></h1>
         <p class="hero__sub" data-i18n="hero_sub">Desarrollador con <strong>base sólida en sistemas y redes</strong>, centrado ahora en el desarrollo de aplicaciones multiplataforma. Busco <strong>prácticas por convenio</strong> en proyectos IT reales: procesos, desarrollo y control de calidad.</p>
         <div class="hero__cta">
           <a class="btn btn--accent" href="#proyectos" data-i18n="see_proj">Ver proyectos</a>
@@ -109,9 +112,9 @@
       <div class="tile glass tile--stats" data-in>
         <p class="label" data-i18n="fig_k">En cifras</p>
         <ul class="stats">
-          <li><b>2º</b><span data-i18n="st1">curso de DAM</span></li>
-          <li><b>2</b><span data-i18n="st2">prácticas en empresa</span></li>
-          <li><b>6</b><span data-i18n="st3">certificaciones</span></li>
+          <li><b data-count="2" data-suffix="º">2º</b><span data-i18n="st1">curso de DAM</span></li>
+          <li><b data-count="2">2</b><span data-i18n="st2">prácticas en empresa</span></li>
+          <li><b data-count="6">6</b><span data-i18n="st3">certificaciones</span></li>
         </ul>
         <p class="loc"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></svg><span data-i18n="loc">Leganés, España</span></p>
       </div>
@@ -142,12 +145,18 @@
     </div>
   </section>
 
+  <!-- FRASE -->
+  <section class="wrap statement" id="sobre-mi">
+    <p class="eyebrow reveal" data-i18n="about_k">Sobre mí</p>
+    <p class="statement__text" id="statement" data-i18n="manifest">Empecé montando y reparando ordenadores. Hoy construyo las aplicaciones que funcionan en ellos, y quiero seguir aprendiendo dentro de un equipo real.</p>
+  </section>
+
   <!-- PROYECTOS -->
   <section class="sec wrap" id="proyectos">
     <div class="head reveal">
       <div>
         <p class="eyebrow" data-i18n="proj_eyebrow">Mis proyectos personales</p>
-        <h2 data-i18n="proj_h">Proyectos destacados</h2>
+        <h2 class="split" data-i18n="proj_h">Proyectos destacados</h2>
       </div>
       <p data-i18n="proj_p">Desarrollos propios, con foco en arquitectura, decisiones de diseño y código abierto.</p>
     </div>
@@ -199,7 +208,7 @@
     <div class="head reveal">
       <div>
         <p class="eyebrow" data-i18n="exp_eyebrow">Trayectoria profesional</p>
-        <h2 data-i18n="exp_h">Experiencia laboral</h2>
+        <h2 class="split" data-i18n="exp_h">Experiencia laboral</h2>
       </div>
       <p data-i18n="exp_p">Prácticas en soporte técnico, redes y sistemas, y mi primer trabajo en logística.</p>
     </div>
@@ -265,7 +274,7 @@
     <div class="head reveal">
       <div>
         <p class="eyebrow" data-i18n="edu_eyebrow">Trayectoria educativa</p>
-        <h2 data-i18n="edu_h">Formación académica</h2>
+        <h2 class="split" data-i18n="edu_h">Formación académica</h2>
       </div>
       <p data-i18n="edu_p">Del mantenimiento de sistemas y redes al desarrollo de aplicaciones multiplataforma.</p>
     </div>
@@ -310,7 +319,7 @@
     <div class="head reveal">
       <div>
         <p class="eyebrow" data-i18n="stack_eyebrow">Mis capacidades</p>
-        <h2 data-i18n="stack_h">Stack técnico</h2>
+        <h2 class="split" data-i18n="stack_h">Stack técnico</h2>
       </div>
       <p data-i18n="stack_p">Tecnologías y herramientas con las que desarrollo proyectos y resuelvo problemas.</p>
     </div>
@@ -351,7 +360,7 @@
   <section class="sec wrap" id="contacto">
     <div class="cta glass reveal">
       <div>
-        <h2 data-i18n="cta_h">¿Tienes unas prácticas en mente?</h2>
+        <h2 class="split" data-i18n="cta_h">¿Tienes unas prácticas en mente?</h2>
         <p data-i18n="cta_p">Cuéntame qué proyecto tenéis y qué necesitáis. Te contesto lo antes posible.</p>
       </div>
       <div class="cta__actions">
@@ -370,7 +379,7 @@
   <a href="#inicio" data-i18n="top">Volver arriba</a>
 </footer>
 
-<script src="i18n.js?v=13" defer></script>
-<script src="main.js?v=13" defer></script>
+<script src="i18n.js?v=14" defer></script>
+<script src="main.js?v=14" defer></script>
 </body>
 </html>
