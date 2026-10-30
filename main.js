@@ -142,6 +142,10 @@
     document.title = d._title;
     document.querySelector('meta[name="description"]').setAttribute('content', d._desc);
     select.value = l;
+    document.querySelectorAll('[data-i18n-ph]').forEach(function (el) {
+      if (!el.dataset.esPh) el.dataset.esPh = el.placeholder;
+      el.placeholder = (l === 'es' || d[el.dataset.i18nPh] == null) ? el.dataset.esPh : d[el.dataset.i18nPh];
+    });
     document.querySelectorAll('h2.split').forEach(splitHeading);
     splitStatement();
     moveIndicator();
@@ -151,13 +155,14 @@
   select.addEventListener('change', function () { setLang(select.value, true); });
 
   // ===== Tema claro / oscuro =====
-  document.getElementById('theme').addEventListener('click', function () {
+  function toggleTheme() {
     var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
     root.setAttribute('data-theme', next);
     try { localStorage.setItem('theme', next); } catch (e) {}
     var meta = document.querySelector('meta[name="theme-color"]');
     if (meta) meta.setAttribute('content', next === 'dark' ? '#060912' : '#eef1f8');
-  });
+  }
+  document.getElementById('theme').addEventListener('click', toggleTheme);
 
   // ===== Menú: indicador de cristal que se desliza a la sección activa =====
   var ind = document.getElementById('nav-ind');
@@ -200,7 +205,7 @@
 
   // ===== Entradas escalonadas en las rejillas =====
   if (!reduce) {
-    document.querySelectorAll('.projects, .xps, .edu, .certs, .stack').forEach(function (grid) {
+    document.querySelectorAll('.projects, .now, .edu, .certs, .stack, .faqs').forEach(function (grid) {
       Array.prototype.forEach.call(grid.children, function (c, i) {
         if (c.classList.contains('reveal')) c.style.transitionDelay = (i % 3) * 90 + 'ms';
       });
@@ -253,7 +258,7 @@
   var label = document.getElementById('copy-t');
   var status = document.getElementById('copy-status');
   var email = 'samuelcletomalle@gmail.com';
-  btn.addEventListener('click', function () {
+  function copyEmail() {
     var done = function (ok) {
       var d = dict(current);
       label.textContent = ok ? d._copied : d._copyfail;
@@ -263,5 +268,70 @@
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(email).then(function () { done(true); }, function () { done(false); });
     } else { done(false); }
-  });
+  }
+  btn.addEventListener('click', copyEmail);
+
+  // ===== Hora local en Madrid =====
+  var clock = document.getElementById('clock');
+  function tickClock() {
+    if (!clock) return;
+    try {
+      clock.textContent = new Intl.DateTimeFormat('es-ES', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Madrid' }).format(new Date());
+    } catch (e) { clock.remove(); clock = null; }
+  }
+  tickClock();
+  setInterval(tickClock, 15000);
+
+  // ===== Paleta de comandos (Ctrl+K) =====
+  var dlg = document.getElementById('cmdk');
+  var input = document.getElementById('cmdk-in');
+  var list = document.getElementById('cmdk-list');
+  if (dlg && typeof dlg.showModal === 'function') {
+    var sel = 0, shown = [];
+    function t(key, fallback) { var d = dict(current); return d[key] || fallback; }
+    function commands() {
+      var out = [];
+      document.querySelectorAll('.nav__links a').forEach(function (a) {
+        out.push({ label: a.textContent.trim(), hint: '#', run: function () { location.hash = a.getAttribute('href'); document.querySelector(a.getAttribute('href')).scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' }); } });
+      });
+      out.push({ label: document.querySelector('[data-i18n="nav_contact"]').textContent.trim(), hint: '#', run: function () { document.getElementById('contacto').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' }); } });
+      out.push({ label: t('cmd_copy', 'Copiar email'), hint: '@', run: copyEmail });
+      out.push({ label: t('cmd_theme', 'Cambiar tema'), hint: '◐', run: toggleTheme });
+      out.push({ label: 'GitHub', hint: '↗', run: function () { window.open('https://github.com/SamuelCletoMalle', '_blank', 'noopener'); } });
+      out.push({ label: 'LinkedIn', hint: '↗', run: function () { window.open('https://www.linkedin.com/in/samuelcletomalle', '_blank', 'noopener'); } });
+      return out;
+    }
+    function render() {
+      var q = input.value.trim().toLowerCase();
+      shown = commands().filter(function (c) { return c.label.toLowerCase().indexOf(q) > -1; });
+      if (sel >= shown.length) sel = Math.max(0, shown.length - 1);
+      list.innerHTML = '';
+      shown.forEach(function (c, i) {
+        var li = document.createElement('li');
+        li.setAttribute('role', 'option');
+        li.setAttribute('aria-selected', i === sel ? 'true' : 'false');
+        li.innerHTML = '<span></span><kbd></kbd>';
+        li.firstChild.textContent = c.label;
+        li.lastChild.textContent = c.hint;
+        li.addEventListener('mousemove', function () { if (sel !== i) { sel = i; render(); } });
+        li.addEventListener('click', function () { run(i); });
+        list.appendChild(li);
+      });
+    }
+    function run(i) { var c = shown[i]; dlg.close(); if (c) setTimeout(c.run, 60); }
+    function open() { input.value = ''; sel = 0; render(); dlg.showModal(); input.focus(); }
+    document.getElementById('cmdk-open').addEventListener('click', open);
+    document.addEventListener('keydown', function (e) {
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); dlg.open ? dlg.close() : open(); }
+    });
+    input.addEventListener('input', function () { sel = 0; render(); });
+    input.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowDown') { e.preventDefault(); sel = (sel + 1) % Math.max(1, shown.length); render(); }
+      else if (e.key === 'ArrowUp') { e.preventDefault(); sel = (sel - 1 + shown.length) % Math.max(1, shown.length); render(); }
+      else if (e.key === 'Enter') { e.preventDefault(); run(sel); }
+    });
+    dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
+  } else {
+    var ob = document.getElementById('cmdk-open'); if (ob) ob.remove();
+  }
 })();
