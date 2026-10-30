@@ -2,6 +2,30 @@
   var root = document.documentElement;
   root.classList.add('js');
 
+  // Liquid glass: refracción SVG solo en Chromium de escritorio (Safari y Firefox no la pintan bien)
+  var brands = (navigator.userAgentData && navigator.userAgentData.brands) || [];
+  var isChromium = brands.some(function (b) { return /Chromium/.test(b.brand); });
+  if (isChromium && matchMedia('(pointer: fine)').matches) root.classList.add('refract');
+
+  // Brillo del cristal que sigue al puntero
+  if (matchMedia('(pointer: fine)').matches && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    var glassEls = document.getElementsByClassName('glass');
+    var raf = 0, px = 0, py = 0;
+    window.addEventListener('pointermove', function (e) {
+      px = e.clientX; py = e.clientY;
+      if (raf) return;
+      raf = requestAnimationFrame(function () {
+        raf = 0;
+        for (var i = 0; i < glassEls.length; i++) {
+          var r = glassEls[i].getBoundingClientRect();
+          if (r.bottom < -200 || r.top > innerHeight + 200) continue;
+          glassEls[i].style.setProperty('--mx', (px - r.left) + 'px');
+          glassEls[i].style.setProperty('--my', (py - r.top) + 'px');
+        }
+      });
+    }, { passive: true });
+  }
+
   // Pantalla de carga: barra de progreso breve, luego entra la página
   var loader = document.getElementById('loader');
   function finish() {
@@ -60,7 +84,7 @@
     root.setAttribute('data-theme', next);
     try { localStorage.setItem('theme', next); } catch (e) {}
     var meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.setAttribute('content', next === 'dark' ? '#070b14' : '#eef2fa');
+    if (meta) meta.setAttribute('content', next === 'dark' ? '#060912' : '#eef1f8');
   });
 
   // Aparición de bloques al entrar en pantalla y sección activa en la barra
