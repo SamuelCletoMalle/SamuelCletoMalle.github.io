@@ -433,3 +433,5 @@ kbd { display: inline-block; min-width: 1.6em; padding: .15rem .4rem; border-rad
   .tl .xp--minor { flex-direction: column; align-items: stretch; }
   .foot__cmd { display: none; }
 }
+
+.btn .dl { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }

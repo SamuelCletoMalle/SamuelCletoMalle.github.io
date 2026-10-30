@@ -296,6 +296,7 @@
       });
       out.push({ label: document.querySelector('[data-i18n="nav_contact"]').textContent.trim(), hint: '#', run: function () { document.getElementById('contacto').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' }); } });
       out.push({ label: t('cmd_copy', 'Copiar email'), hint: '@', run: copyEmail });
+      out.push({ label: t('cv', 'Descargar CV'), hint: 'PDF', run: function () { var l = document.createElement('a'); l.href = 'assets/CV_SamuelCleto.pdf'; l.download = 'CV_SamuelCleto.pdf'; document.body.appendChild(l); l.click(); l.remove(); } });
       out.push({ label: t('cmd_theme', 'Cambiar tema'), hint: '◐', run: toggleTheme });
       out.push({ label: 'GitHub', hint: '↗', run: function () { window.open('https://github.com/SamuelCletoMalle', '_blank', 'noopener'); } });
       out.push({ label: 'LinkedIn', hint: '↗', run: function () { window.open('https://www.linkedin.com/in/samuelcletomalle', '_blank', 'noopener'); } });

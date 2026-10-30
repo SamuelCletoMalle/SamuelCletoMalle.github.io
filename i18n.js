@@ -132,7 +132,8 @@ window.I18N = {
     "cmd_close": "close",
     "cmd_hint": "shortcuts",
     "cmd_copy": "Copy email",
-    "cmd_theme": "Toggle theme"
+    "cmd_theme": "Toggle theme",
+    "cv": "Download CV (ES)"
   },
   "fr": {
     "skip": "Aller au contenu",
@@ -266,7 +267,8 @@ window.I18N = {
     "cmd_close": "fermer",
     "cmd_hint": "raccourcis",
     "cmd_copy": "Copier l'e-mail",
-    "cmd_theme": "Changer de thème"
+    "cmd_theme": "Changer de thème",
+    "cv": "Télécharger le CV (ES)"
   },
   "de": {
     "skip": "Zum Inhalt springen",
@@ -400,6 +402,7 @@ window.I18N = {
     "cmd_close": "schließen",
     "cmd_hint": "Tastenkürzel",
     "cmd_copy": "E-Mail kopieren",
-    "cmd_theme": "Thema wechseln"
+    "cmd_theme": "Thema wechseln",
+    "cv": "Lebenslauf (ES)"
   }
 };
