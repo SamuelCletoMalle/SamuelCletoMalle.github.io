@@ -59,9 +59,9 @@
   }
 
   function build() {
-    var r = tile.getBoundingClientRect();
-    W = Math.max(1, Math.round(r.width));
-    H = Math.max(1, Math.round(r.height));
+    // tamaño sin transformaciones (la foto puede estar escalada por el scroll)
+    W = Math.max(1, Math.round(tile.offsetWidth));
+    H = Math.max(1, Math.round(tile.offsetHeight));
     dpr = Math.min(window.devicePixelRatio || 1, 2);
     canvas.width = W * dpr; canvas.height = H * dpr;
     canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
@@ -283,7 +283,7 @@
   // Eventos
   tile.addEventListener('pointermove', function (e) {
     var r = canvas.getBoundingClientRect();
-    mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top; mouse.on = true;
+    mouse.x = (e.clientX - r.left) * (W / (r.width || W)); mouse.y = (e.clientY - r.top) * (H / (r.height || H)); mouse.on = true;
     lastMove = performance.now();
     if (reduce) { lens.x = mouse.x; lens.y = mouse.y; lens.r = Math.min(W, H) * 0.2; step(performance.now()); }
     kick();
