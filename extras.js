@@ -286,7 +286,7 @@
     ITEMS.forEach(function (it) {
       var el = document.createElement('span');
       el.className = 'chip-body';
-      el.innerHTML = '<i class="ico" style="--i:url(https://cdn.simpleicons.org/' + it[1] + ')"></i>' + it[0];
+      el.innerHTML = '<i class="ico" style="--i:var(--ic-' + it[1] + ')"></i>' + it[0];
       box.appendChild(el);
       bodies.push({ el: el, x: 0, y: 0, vx: 0, vy: 0, w: 0, h: 0, a: 0, drag: false });
     });

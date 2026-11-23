@@ -24,6 +24,7 @@
   var GLITCH = '01{}[]()<>=+*/;:#$%&@?!';
 
   var W = 0, H = 0, dpr = 1, cw = 8, ch = 10, cols = 0, rows = 0, sil = null;
+  var cache = null, cacheOk = false, glitches = []; // imagen de las letras ya colocadas, para el reposo
   var parts = [];            // partículas: una por celda con brillo suficiente
   var running = false, visible = true, raf = 0, idleTimer = 0, t0 = 0, lastT = 0;
   var mouse = { x: -9999, y: -9999, on: false };
@@ -141,6 +142,10 @@
     sc.fillStyle = isLight() ? '#f7f6f2' : '#070707';
     sc.fillRect(0, 0, W, H);
 
+    cache = document.createElement('canvas');
+    cache.width = canvas.width; cache.height = canvas.height;
+    cacheOk = false; glitches = [];
+
     lens.x = lens.x || W / 2; lens.y = lens.y || H * 0.35;
     return true;
   }
@@ -154,7 +159,7 @@
     lastT = now;
 
     // Lupa: sigue al ratón; en táctil, deriva sola tras un rato sin tocar
-    var auto = touch && now - lastMove > 2500;
+    var auto = touch && now - lastMove > 2200 && now - lastMove < 6500; // en móvil solo unos segundos
     if (mouse.on) { var e = 1 - Math.pow(0.75, sub); lens.x += (mouse.x - lens.x) * e; lens.y += (mouse.y - lens.y) * e; lens.target = Math.min(W, H) * 0.2; }
     else if (auto && !reduce) {
       lens.x = W * (0.5 + 0.28 * Math.sin(t * 0.55));
@@ -164,6 +169,9 @@
     lens.r += (lens.target - lens.r) * (1 - Math.pow(0.82, sub));
 
     reveal += ((photoMode ? 1 : 0) - reveal) * (reduce ? 1 : 1 - Math.pow(0.92, sub));
+
+    var quiet = cacheOk && lens.r < 0.5 && lens.target === 0 && reveal < 0.001;
+    if (quiet) { idleFrame(t); return schedule(true, true); }
 
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     ctx.clearRect(0, 0, W, H);
@@ -212,6 +220,15 @@
     }
     ctx.globalAlpha = 1;
 
+    // en cuanto las letras se quedan quietas, se guarda la imagen para el reposo
+    if (!reduce && settled && t > 2 && lens.r < 0.5 && lens.target === 0 && reveal < 0.001 && cache) {
+      var cc = cache.getContext('2d');
+      cc.setTransform(1, 0, 0, 1, 0, 0);
+      cc.clearRect(0, 0, cache.width, cache.height);
+      cc.drawImage(canvas, 0, 0);
+      cacheOk = true;
+    } else if (!settled || lens.r >= 0.5) cacheOk = false;
+
     // Foto real: dentro de la lupa, o entera en modo foto
     var cr = coverRect(img.naturalWidth, img.naturalHeight, W, H);
     var photoR = Math.max(lens.r, reveal * Math.hypot(W, H));
@@ -249,12 +266,50 @@
     }
 
     var needMore = !reduce && (!settled || lens.r > 0.5 || lens.target > 0 || Math.abs(reveal - (photoMode ? 1 : 0)) > 0.002 || alive > 0.01);
-    if (needMore && running && visible) {
-      var idle = settled && lens.r < 0.5 && lens.target === 0 && Math.abs(reveal - (photoMode ? 1 : 0)) < 0.002;
-      if (idle) lastT = 0;
-      if (idle) idleTimer = setTimeout(function () { idleTimer = 0; kick(); }, 90); // en reposo basta con ~11 fps para el parpadeo
-      else raf = requestAnimationFrame(step);
+    var idle = settled && lens.r < 0.5 && lens.target === 0 && Math.abs(reveal - (photoMode ? 1 : 0)) < 0.002;
+    schedule(needMore, idle);
+  }
+
+  // Reposo: se pinta la imagen guardada, unas pocas letras que parpadean y la línea de escaneo
+  function idleFrame(t) {
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(cache, 0, 0);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    var now = performance.now();
+    if (parts.length && Math.random() < 0.6) glitches.push({ p: parts[(Math.random() * parts.length) | 0], until: now + 120 + Math.random() * 260, c: GLITCH[(Math.random() * GLITCH.length) | 0] });
+    if (glitches.length) {
+      ctx.font = '500 ' + ch.toFixed(1) + 'px "Geist Mono", ui-monospace, monospace';
+      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      var bg = isLight() ? '#f7f6f2' : '#070707';
+      glitches = glitches.filter(function (gl) {
+        if (gl.until < now) return false;
+        ctx.fillStyle = bg; ctx.fillRect(gl.p.hx - cw / 2, gl.p.hy - ch / 2, cw, ch);
+        ctx.fillStyle = '#fff6dc'; ctx.fillText(gl.c, gl.p.hx, gl.p.hy);
+        return true;
+      });
     }
+    // la línea de escaneo pasa una vez cada 6 segundos (y no se pinta nada entre pasadas)
+    var ph = t % SWEEP_EVERY;
+    if (ph < SWEEP_TIME) {
+      var sy = (ph / SWEEP_TIME) * (H + 120) - 60;
+      var sg = ctx.createLinearGradient(0, sy - 60, 0, sy + 2);
+      sg.addColorStop(0, 'rgba(255,236,180,0)'); sg.addColorStop(1, 'rgba(255,236,180,.55)');
+      ctx.globalCompositeOperation = 'source-atop';
+      ctx.fillStyle = sg; ctx.fillRect(0, sy - 60, W, 62);
+      ctx.globalCompositeOperation = 'source-over';
+    }
+  }
+  var SWEEP_EVERY = 6, SWEEP_TIME = 1.6;
+  function sweeping() { return t0 && ((performance.now() - t0) / 1000) % SWEEP_EVERY < SWEEP_TIME + 0.1; }
+
+  function schedule(needMore, idle) {
+    if (!(needMore && running && visible)) return;
+    if (idle) {
+      lastT = 0;
+      // reposo: 30 fps solo mientras pasa la línea; entre pasadas, 5 fps para el parpadeo de letras
+      idleTimer = setTimeout(function () { idleTimer = 0; kick(); }, sweeping() ? 33 : 200);
+    } else raf = requestAnimationFrame(step);
   }
 
   function kick() {
@@ -274,6 +329,7 @@
       addHint();
     }
     running = true;
+    lastMove = performance.now();
     kick();
   }
 

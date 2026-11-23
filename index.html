@@ -12,46 +12,29 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23e2b75a'/%3E%3Ctext x='32' y='43' font-family='Arial' font-weight='800' font-size='30' text-anchor='middle' fill='%23171106'%3ESC%3C/text%3E%3C/svg%3E">
 <link rel="preload" href="assets/fonts/unbounded.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/geist.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="styles.css?v=20">
-<link rel="stylesheet" href="editorial.css?v=3">
+<link rel="preload" as="image" href="assets/foto-recorte.webp?v=1" type="image/webp" fetchpriority="high">
+<link rel="stylesheet" href="icons.css?v=1">
+<link rel="stylesheet" href="styles.css?v=21">
+<link rel="stylesheet" href="editorial.css?v=6">
 <script>
-  /* Oscuro por defecto; solo cambia si el usuario eligió claro. Pantalla de carga salvo movimiento reducido */
+  /* Oscuro por defecto; solo cambia si el usuario eligió claro */
   (function () {
-    var r = document.documentElement, t = null;
+    var t = null;
     try { t = localStorage.getItem('theme'); } catch (e) {}
-    r.setAttribute('data-theme', t === 'light' ? 'light' : 'dark');
-    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) r.classList.add('loading');
+    document.documentElement.setAttribute('data-theme', t === 'light' ? 'light' : 'dark');
   })();
 </script>
 </head>
 <body>
-<!-- Filtro SVG de refracción para el cristal del menú (solo Chromium) -->
-<svg class="sr" aria-hidden="true" focusable="false">
-  <filter id="lg" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
-    <feTurbulence type="fractalNoise" baseFrequency="0.008 0.012" numOctaves="2" seed="7" result="noise"/>
-    <feGaussianBlur in="noise" stdDeviation="2" result="soft"/>
-    <feDisplacementMap in="SourceGraphic" in2="soft" scale="38" xChannelSelector="R" yChannelSelector="G"/>
-  </filter>
-</svg>
-
-<!-- Fondo: luz dorada y polvo de código -->
-<div class="bg" aria-hidden="true">
-  <i class="blob b1"></i><i class="blob b2"></i><i class="blob b3"></i><i class="blob b4"></i>
-  <div class="dots"></div>
-</div>
-
-<div class="loader" id="loader" aria-hidden="true">
-  <p class="loader__name">Samuel Cleto</p>
-  <div class="loader__bar"><i id="loader-bar"></i></div>
-  <p class="loader__pct" id="loader-pct">0%</p>
-</div>
+<!-- Fondo: luz dorada fija y polvo de código -->
+<div class="bg" aria-hidden="true"><div class="dots"></div></div>
 
 <div class="progress" aria-hidden="true"><i id="progress"></i></div>
 
 <a class="skip" href="#contenido" data-i18n="skip">Saltar al contenido</a>
 
 <header class="nav" id="nav">
-  <div class="nav__pill glass glass--refract">
+  <div class="nav__pill glass">
     <a class="brand" href="#inicio" aria-label="Samuel Cleto Malle"><span class="brand__mark">SC</span><span class="brand__name">Samuel Cleto</span></a>
     <nav class="nav__links" aria-label="Principal">
       <span class="nav__ind" id="nav-ind" aria-hidden="true"></span>
@@ -106,7 +89,7 @@
       <div class="hero2__cta" data-in>
         <a class="btn btn--accent" href="#proyectos" data-i18n="see_proj">Ver proyectos</a>
         <a class="btn btn--glass" href="assets/CV_SamuelCleto.pdf" download="CV_SamuelCleto.pdf"><svg class="dl" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11m0 0-4.5-4.5M12 15l4.5-4.5M5 19h14"/></svg><span data-i18n="cv">Descargar CV</span></a>
-        <a class="btn btn--glass" href="https://github.com/SamuelCletoMalle" target="_blank" rel="noopener"><i class="ico" style="--i:url(https://cdn.simpleicons.org/github)"></i>GitHub</a>
+        <a class="btn btn--glass" href="https://github.com/SamuelCletoMalle" target="_blank" rel="noopener"><i class="ico" style="--i:var(--ic-github)"></i>GitHub</a>
         <a class="btn btn--glass" href="https://www.linkedin.com/in/samuelcletomalle" target="_blank" rel="noopener">LinkedIn</a>
       </div>
     </div>
@@ -114,34 +97,27 @@
     <a class="hero2__scroll mono" href="#sobre-mi" aria-label="Bajar"><span data-i18n="scroll_k">Desliza</span><i aria-hidden="true"></i></a>
   </section>
 
-  <!-- CIFRAS Y STACK EN MOVIMIENTO -->
-  <section class="figures wrap" aria-label="En cifras">
-    <ul class="stats">
-      <li><b data-count="2" data-suffix="º">2º</b><span data-i18n="st1">curso de DAM</span></li>
-      <li><b data-count="2">2</b><span data-i18n="st2">prácticas en empresa</span></li>
-      <li><b data-count="8">8</b><span data-i18n="st3">certificaciones</span></li>
-    </ul>
-  </section>
+  <!-- STACK EN MOVIMIENTO -->
   <div class="tile--marquee" aria-hidden="true">
     <ul class="marquee__track">
-      <li><i class="ico" style="--i:url(https://cdn.simpleicons.org/openjdk)"></i>Java</li>
-      <li><i class="ico" style="--i:url(https://cdn.simpleicons.org/python)"></i>Python</li>
-      <li><i class="ico" style="--i:url(https://cdn.simpleicons.org/javascript)"></i>JavaScript</li>
-      <li><i class="ico" style="--i:url(https://cdn.simpleicons.org/react)"></i>React</li>
-      <li><i class="ico" style="--i:url(https://cdn.simpleicons.org/expo)"></i>Expo</li>
-      <li><i class="ico" style="--i:url(https://cdn.simpleicons.org/supabase)"></i>Supabase</li>
-      <li><i class="ico" style="--i:url(https://cdn.simpleicons.org/git)"></i>Git</li>
-      <li><i class="ico" style="--i:url(https://cdn.simpleicons.org/github)"></i>GitHub</li>
-      <li><i class="ico" style="--i:url(https://cdn.simpleicons.org/linux)"></i>Linux</li>
-      <li><i class="ico" style="--i:url(https://cdn.simpleicons.org/openjdk)"></i>Java</li>
-      <li><i class="ico" style="--i:url(https://cdn.simpleicons.org/python)"></i>Python</li>
-      <li><i class="ico" style="--i:url(https://cdn.simpleicons.org/javascript)"></i>JavaScript</li>
-      <li><i class="ico" style="--i:url(https://cdn.simpleicons.org/react)"></i>React</li>
-      <li><i class="ico" style="--i:url(https://cdn.simpleicons.org/expo)"></i>Expo</li>
-      <li><i class="ico" style="--i:url(https://cdn.simpleicons.org/supabase)"></i>Supabase</li>
-      <li><i class="ico" style="--i:url(https://cdn.simpleicons.org/git)"></i>Git</li>
-      <li><i class="ico" style="--i:url(https://cdn.simpleicons.org/github)"></i>GitHub</li>
-      <li><i class="ico" style="--i:url(https://cdn.simpleicons.org/linux)"></i>Linux</li>
+      <li><i class="ico" style="--i:var(--ic-openjdk)"></i>Java</li>
+      <li><i class="ico" style="--i:var(--ic-python)"></i>Python</li>
+      <li><i class="ico" style="--i:var(--ic-javascript)"></i>JavaScript</li>
+      <li><i class="ico" style="--i:var(--ic-react)"></i>React</li>
+      <li><i class="ico" style="--i:var(--ic-expo)"></i>Expo</li>
+      <li><i class="ico" style="--i:var(--ic-supabase)"></i>Supabase</li>
+      <li><i class="ico" style="--i:var(--ic-git)"></i>Git</li>
+      <li><i class="ico" style="--i:var(--ic-github)"></i>GitHub</li>
+      <li><i class="ico" style="--i:var(--ic-linux)"></i>Linux</li>
+      <li><i class="ico" style="--i:var(--ic-openjdk)"></i>Java</li>
+      <li><i class="ico" style="--i:var(--ic-python)"></i>Python</li>
+      <li><i class="ico" style="--i:var(--ic-javascript)"></i>JavaScript</li>
+      <li><i class="ico" style="--i:var(--ic-react)"></i>React</li>
+      <li><i class="ico" style="--i:var(--ic-expo)"></i>Expo</li>
+      <li><i class="ico" style="--i:var(--ic-supabase)"></i>Supabase</li>
+      <li><i class="ico" style="--i:var(--ic-git)"></i>Git</li>
+      <li><i class="ico" style="--i:var(--ic-github)"></i>GitHub</li>
+      <li><i class="ico" style="--i:var(--ic-linux)"></i>Linux</li>
     </ul>
   </div>
 
@@ -165,7 +141,7 @@
       <div class="float f1" data-speed="0.08">
         <article class="proj glass reveal">
           <div class="proj__visual proj__visual--balanz">
-            <img src="assets/balanz-icon.png" width="220" height="220" alt="Balanz" loading="lazy">
+            <img src="assets/balanz-icon.webp" width="256" height="256" decoding="async" alt="Balanz" loading="lazy">
           </div>
           <div class="proj__body">
             <p class="mono" data-i18n="p1_k">App móvil y web</p>
@@ -180,7 +156,7 @@
         </article>
       </div>
 
-      <div class="float f2" data-speed="-0.12">
+      <div class="float f2" data-speed="-0.06">
         <article class="proj glass reveal">
           <div class="proj__visual proj__visual--teal" aria-hidden="true"><span>WEB</span></div>
           <div class="proj__body">
@@ -192,7 +168,7 @@
         </article>
       </div>
 
-      <div class="float f3" data-speed="0.2">
+      <div class="float f3" data-speed="0.1">
         <article class="proj glass reveal">
           <div class="proj__visual proj__visual--blue" aria-hidden="true"><span>DAM</span></div>
           <div class="proj__body">
@@ -365,27 +341,27 @@
         <article class="stack__col reveal">
           <h3><span data-i18n="s1_h">Lenguajes</span> <span class="count">5</span></h3>
           <ul class="skills">
-            <li><i class="ico" style="--i:url(https://cdn.simpleicons.org/openjdk)"></i>Java</li>
-            <li><i class="ico" style="--i:url(https://cdn.simpleicons.org/python)"></i>Python</li>
-            <li><i class="ico" style="--i:url(https://cdn.simpleicons.org/javascript)"></i>JavaScript</li>
-            <li><i class="ico" style="--i:url(https://cdn.simpleicons.org/sqlite)"></i>SQL y Oracle PL/SQL</li>
-            <li><i class="ico" style="--i:url(https://cdn.simpleicons.org/html5)"></i>HTML y CSS</li>
+            <li><i class="ico" style="--i:var(--ic-openjdk)"></i>Java</li>
+            <li><i class="ico" style="--i:var(--ic-python)"></i>Python</li>
+            <li><i class="ico" style="--i:var(--ic-javascript)"></i>JavaScript</li>
+            <li><i class="ico" style="--i:var(--ic-sqlite)"></i>SQL · Oracle PL/SQL</li>
+            <li><i class="ico" style="--i:var(--ic-html5)"></i>HTML · CSS</li>
           </ul>
         </article>
         <article class="stack__col reveal">
           <h3><span data-i18n="s2_h">Apps y web</span> <span class="count">3</span></h3>
           <ul class="skills">
-            <li><i class="ico" style="--i:url(https://cdn.simpleicons.org/react)"></i>React y React Native</li>
-            <li><i class="ico" style="--i:url(https://cdn.simpleicons.org/expo)"></i>Expo</li>
-            <li><i class="ico" style="--i:url(https://cdn.simpleicons.org/supabase)"></i>Supabase</li>
+            <li><i class="ico" style="--i:var(--ic-react)"></i>React · React Native</li>
+            <li><i class="ico" style="--i:var(--ic-expo)"></i>Expo</li>
+            <li><i class="ico" style="--i:var(--ic-supabase)"></i>Supabase</li>
           </ul>
         </article>
         <article class="stack__col reveal">
           <h3><span data-i18n="s3_h">Sistemas y herramientas</span> <span class="count">5</span></h3>
           <ul class="skills">
-            <li><i class="ico" style="--i:url(https://cdn.simpleicons.org/git)"></i>Git y GitHub</li>
-            <li><i class="ico" style="--i:url(https://cdn.simpleicons.org/linux)"></i><span data-i18n="s3_a">Redes y servidores</span></li>
-            <li><i class="ico" style="--i:url(https://cdn.simpleicons.org/amazonwebservices)"></i>AWS Cloud Practitioner</li>
+            <li><i class="ico" style="--i:var(--ic-git)"></i>Git · GitHub</li>
+            <li><i class="ico" style="--i:var(--ic-linux)"></i><span data-i18n="s3_a">Redes y servidores</span></li>
+            <li><i class="ico" style="--i:var(--ic-amazonwebservices)"></i>AWS Cloud Practitioner</li>
             <li class="plain" data-i18n="s3_b">Soporte técnico y help desk</li>
             <li class="plain" data-i18n="s3_c">Diagnóstico de hardware</li>
           </ul>
@@ -517,9 +493,9 @@
 
 <script src="i18n.js?v=20" defer></script>
 <script src="main.js?v=20" defer></script>
-<script src="code-portrait.js?v=7" defer></script>
-<script src="code-dust.js?v=2" defer></script>
-<script src="extras.js?v=2" defer></script>
+<script src="code-portrait.js?v=9" defer></script>
+<script src="code-dust.js?v=4" defer></script>
+<script src="extras.js?v=3" defer></script>
 <script src="editorial.js?v=1" defer></script>
 </body>
 </html>
