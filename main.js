@@ -160,7 +160,7 @@
     root.setAttribute('data-theme', next);
     try { localStorage.setItem('theme', next); } catch (e) {}
     var meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.setAttribute('content', next === 'dark' ? '#060912' : '#eef1f8');
+    if (meta) meta.setAttribute('content', next === 'dark' ? '#0b0806' : '#f5efe5');
   }
   document.getElementById('theme').addEventListener('click', toggleTheme);
 
@@ -238,6 +238,23 @@
     document.querySelectorAll('main section[id]').forEach(function (s) { so.observe(s); });
   } else {
     items.forEach(function (el) { el.classList.add('is-in'); });
+  }
+
+  // ===== Año gigante de la trayectoria =====
+  var ghost = document.getElementById('ghost-year');
+  if (ghost && 'IntersectionObserver' in window) {
+    var go = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        var y = e.target.dataset.year;
+        if (ghost.textContent === y) return;
+        ghost.classList.remove('flip');
+        void ghost.offsetWidth;
+        ghost.textContent = y;
+        ghost.classList.add('flip');
+      });
+    }, { rootMargin: '-45% 0px -45% 0px' });
+    document.querySelectorAll('.tl__item[data-year]').forEach(function (li) { go.observe(li); });
   }
 
   // ===== Inclinación 3D suave en las tarjetas de proyecto =====
