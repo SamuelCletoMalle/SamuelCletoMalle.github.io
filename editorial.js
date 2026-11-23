@@ -1,6 +1,7 @@
 /* Movimiento del diseño editorial ligado al scroll:
    - el menú pasa a cristal al bajar
-   - en el inicio, "SAMUEL" y "CLETO" se separan y la foto se reduce
+   - en el inicio, "SAMUEL" y "CLETO" se separan, la foto se vuelve estatua de mármol
+     y desciende la corona de laurel dorada
    - los títulos gigantes crecen al entrar
    - los proyectos flotan a distintas velocidades */
 (function () {
@@ -21,8 +22,24 @@
     if (nav) nav.classList.toggle('is-scrolled', y > 30);
     if (reduce) return;
 
-    if (hero && wide.matches) hero.style.setProperty('--s', clamp(y / vh).toFixed(4));
-    else if (hero) hero.style.setProperty('--s', 0);
+    if (hero) {
+      // escritorio: el inicio queda fijo 110vh mientras se petrifica y llega la corona
+      // móvil: sin fijar, la transformación ocurre en el primer cuarto de pantalla
+      var st, lr;
+      if (wide.matches) {
+        hero.style.setProperty('--s', clamp(y / (vh * 1.1)).toFixed(4));
+        st = clamp((y - vh * 0.05) / (vh * 0.5));
+        lr = clamp((y - vh * 0.6) / (vh * 0.35));
+      } else {
+        hero.style.setProperty('--s', 0);
+        st = clamp(y / (vh * 0.2));
+        lr = clamp((y - vh * 0.17) / (vh * 0.13));
+      }
+      lr = 1 - Math.pow(1 - lr, 3); // la corona frena al posarse
+      hero.style.setProperty('--st', st.toFixed(4));
+      hero.style.setProperty('--lr', lr.toFixed(4));
+      hero.classList.toggle('is-crowned', lr > 0.98);
+    }
 
     for (var i = 0; i < chapters.length; i++) {
       var r = chapters[i].getBoundingClientRect();

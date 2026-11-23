@@ -59,7 +59,6 @@ a { text-underline-offset: .2em; }
   width: clamp(230px, 25vw, 390px); aspect-ratio: 837 / 959; min-height: 0; margin: 0; padding: 0;
   translate: -50% -50%; scale: calc(1 - var(--s) * .12);
   border: 0; border-radius: 0; box-shadow: none; background: none; overflow: visible;
-  -webkit-mask: linear-gradient(#000 62%, transparent 97%); mask: linear-gradient(#000 62%, transparent 97%);
   grid-column: auto; grid-row: auto;
 }
 .hero2 .hero2__photo::after { display: none; }
@@ -215,4 +214,186 @@ a { text-underline-offset: .2em; }
 }
 @media (prefers-reduced-motion: reduce) and (max-width: 960px) {
   .hero2 .hero2__photo { translate: none; }
+}
+
+/* =====================================================================
+   Blanco y negro con detalles en dorado
+   Lo principal en blanco/negro; el dorado (--gold) solo en detalles.
+   ===================================================================== */
+:root {
+  --gold: #e2b75a;
+  --accent: #f2f2f2;           /* acento principal: blanco */
+  --accent-2: #9a9a9a;
+  --accent-3: #ffffff;
+  --accent-ink: #0a0a0a;
+  --accent-text: #d4d4d4;
+  --g-rim-2: rgba(255, 255, 255, .14);
+}
+:root[data-theme="light"] {
+  --accent: #111111;           /* en claro, el acento es negro */
+  --accent-2: #666666;
+  --accent-3: #000000;
+  --accent-ink: #ffffff;
+  --accent-text: #333333;
+  --g-rim-2: rgba(0, 0, 0, .12);
+  --chip-line: rgba(0, 0, 0, .12);
+  --bg: #f6f6f4;
+}
+/* botones y etiquetas principales: blanco sólido (negro en claro) */
+.btn--accent, .pill--on, .brand__mark { background: var(--accent); color: var(--accent-ink); box-shadow: inset 0 1px 0 rgba(255,255,255,.4), 0 10px 26px -14px rgba(0,0,0,.6); }
+.btn--accent:hover { box-shadow: inset 0 1px 0 rgba(255,255,255,.5), 0 14px 30px -14px rgba(0,0,0,.7); }
+/* fondo: luz neutra, sin tono */
+.bg { background:
+  radial-gradient(55% 45% at 15% 5%, rgba(255,255,255,.06), transparent 70%),
+  radial-gradient(45% 40% at 95% 35%, rgba(255,255,255,.04), transparent 70%),
+  radial-gradient(60% 45% at 45% 105%, rgba(255,255,255,.05), transparent 70%); }
+:root[data-theme="light"] .bg { background: radial-gradient(60% 50% at 20% 0%, rgba(0,0,0,.04), transparent 70%); }
+.hero2 .hero2__photo::before { background: radial-gradient(closest-side, rgba(255,255,255,.14), rgba(255,255,255,.04) 55%, transparent 72%); }
+:root[data-theme="light"] .hero2 .hero2__photo::before { background: radial-gradient(closest-side, rgba(0,0,0,.08), transparent 70%); }
+.contact2::before { background: radial-gradient(closest-side, rgba(255,255,255,.08), transparent); }
+
+/* ---- detalles en dorado ---- */
+.grad { background: none; -webkit-background-clip: border-box; background-clip: border-box; color: var(--gold); animation: none; }
+.progress i { background: var(--gold); box-shadow: 0 0 10px var(--gold); }
+.chapter__title::after { background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+.tl__when::after { background: var(--gold); box-shadow: 0 0 0 5px rgba(226,183,90,.18), 0 0 14px rgba(226,183,90,.6); }
+.tl::before { background: linear-gradient(var(--gold), rgba(226,183,90,.25) 60%, transparent); }
+.rk-btn { color: var(--gold); border-color: rgba(226,183,90,.45); }
+.rk-btn:hover { background: rgba(226,183,90,.12); }
+.rk__ring { background: conic-gradient(var(--gold) calc(var(--p) * 360deg), color-mix(in srgb, var(--text) 10%, transparent) 0); }
+.rk__num { color: var(--gold); }
+.contact2__mail { border-bottom-color: var(--gold); }
+.contact2__mail:hover { color: var(--gold); }
+.nav__links a.is-on::after { content: ""; position: absolute; left: 50%; bottom: 3px; width: 4px; height: 4px; margin-left: -2px; border-radius: 50%; background: var(--gold); }
+.now__col--avail .label::before { background: var(--gold); box-shadow: 0 0 0 3px rgba(226,183,90,.2); }
+.status__dot { background: var(--gold); box-shadow: 0 0 0 4px rgba(226,183,90,.18); }
+.code-hint__dot { background: var(--gold); box-shadow: 0 0 10px var(--gold); }
+.t-ps, .t-gold { color: var(--gold); }
+::selection { background: rgba(226,183,90,.4); }
+html { scrollbar-color: rgba(255,255,255,.25) transparent; }
+:root[data-theme="light"] { scrollbar-color: rgba(0,0,0,.25) transparent; }
+input, textarea { caret-color: var(--gold); }
+
+/* ---- grandes contornos en blanco (negro en claro) ---- */
+.hero2__w--2 { -webkit-text-stroke-color: var(--text); }
+.stage__word span, .tl__ghost span { color: transparent; -webkit-text-stroke-color: color-mix(in srgb, var(--text) 40%, transparent); }
+.now__n { -webkit-text-stroke-color: var(--text); }
+
+/* ---- fichas y terminal en neutro ---- */
+.chip-body { background: linear-gradient(145deg, color-mix(in srgb, var(--text) 10%, transparent), color-mix(in srgb, var(--text) 3%, transparent)); border-color: color-mix(in srgb, var(--text) 22%, transparent); }
+.chip-body.held { border-color: var(--gold); }
+.term__chips button { border-color: rgba(255,255,255,.18); background: rgba(255,255,255,.05); color: #e8e8e8; }
+.term__chips button:hover { background: rgba(255,255,255,.12); }
+.t-cmd { color: #ffffff; }
+.term__out a { color: #ffffff; }
+.term__bar i:first-child { background: var(--gold); }
+/* en claro, el dorado se oscurece para que se lea sobre blanco */
+:root[data-theme="light"] { --gold: #9a6c1c; }
+
+/* =========================================================
+   TEMA DIOS GRIEGO: mármol, negro y oro
+   Al bajar, el retrato se petrifica de abajo arriba y
+   después desciende la corona de laurel dorada.
+   ========================================================= */
+@font-face { font-family: "Cinzel"; src: url("assets/fonts/cinzel.woff") format("woff"); font-weight: 400 900; font-display: swap; }
+:root { --display: "Cinzel", "Times New Roman", serif; }
+
+/* Cinzel es una romana ancha: nada de tracking negativo */
+.hero2__name, .chapter__title, .chapter::before, .stage__word span, .now__n, .now__col h3,
+.row__main h3, .stack__col h3, .contact2__title, .contact2__mail, .hero2__kicker,
+.brand, .loader__name, .tl__ghost span { letter-spacing: .01em; }
+.hero2__name { font-weight: 700; font-size: clamp(3.2rem, 14.2vw, 15rem); line-height: .82; }
+.chapter__title, .contact2__title { font-weight: 700; letter-spacing: .005em; }
+
+/* CLETO vuelve al oro: contorno dorado que se rellena cuando llega la corona */
+.hero2__w--2 {
+  --o: calc(var(--lr) * 100%);
+  -webkit-text-stroke: 2px var(--gold);
+  background: linear-gradient(100deg,
+    color-mix(in srgb, #9a6c1c var(--o), transparent), color-mix(in srgb, #f6dc8f var(--o), transparent) 35%,
+    color-mix(in srgb, #c8952f var(--o), transparent) 60%, color-mix(in srgb, #fff0c2 var(--o), transparent) 80%,
+    color-mix(in srgb, #9a6c1c var(--o), transparent));
+  -webkit-background-clip: text; background-clip: text;
+  color: transparent; -webkit-text-fill-color: transparent;
+}
+
+/* contenedor que fija el inicio mientras ocurre la transformación */
+.hero-pin { position: relative; }
+@media (min-width: 961px) {
+  .hero-pin { height: 210vh; }
+  .hero-pin > .hero2 { position: sticky; top: 0; height: 100vh; min-height: 0; }
+}
+
+/* la foto y el retrato de código se funden por abajo */
+.hero2 .photo__img, .hero2 .code-portrait { -webkit-mask: linear-gradient(#000 62%, transparent 97%); mask: linear-gradient(#000 62%, transparent 97%); }
+
+/* la estatua: alineada con la cara de la foto (los hombros sobresalen de la caja)
+   y se descubre de abajo arriba, como si la piedra subiera */
+.hero2 .statue, .hero2 .laurel {
+  position: absolute; left: -21.35%; top: -.72%; width: 135.08%; height: auto; max-width: none;
+  pointer-events: none;
+}
+.hero2 .statue {
+  z-index: 3;
+  clip-path: inset(calc((1 - var(--st)) * 100%) 0 0 0);
+  -webkit-mask: linear-gradient(#000 74%, transparent 96%); mask: linear-gradient(#000 74%, transparent 96%);
+}
+.hero2 .petrify-line {
+  position: absolute; left: -8%; right: -8%; z-index: 4; height: 2px;
+  top: calc(-.72% + (1 - var(--st)) * 115%);
+  background: linear-gradient(90deg, transparent, var(--gold) 20%, #fff3c4 50%, var(--gold) 80%, transparent);
+  box-shadow: 0 0 18px 2px rgba(226,183,90,.55);
+  opacity: calc(min(var(--st) * 8, 1) * min((1 - var(--st)) * 8, 1));
+  pointer-events: none;
+}
+.hero2 .petrify-line::before {
+  content: ""; position: absolute; inset: -14px 8% -14px;
+  background: radial-gradient(1px 1px at 12% 40%, #fff 50%, transparent 51%), radial-gradient(1px 1px at 37% 70%, #f6dc8f 50%, transparent 51%),
+              radial-gradient(1.5px 1.5px at 58% 30%, #fff 50%, transparent 51%), radial-gradient(1px 1px at 81% 60%, #f6dc8f 50%, transparent 51%);
+  opacity: .8;
+}
+
+/* la corona de laurel de oro baja y se posa en la cabeza */
+.hero2 .laurel {
+  z-index: 5;
+  opacity: min(var(--lr) * 2.5, 1);
+  translate: 0 calc((1 - var(--lr)) * -30%);
+  scale: calc(1.12 - var(--lr) * .12);
+  rotate: calc((1 - var(--lr)) * -6deg);
+  transform-origin: 50% 12%;
+  filter: drop-shadow(0 calc((1 - var(--lr)) * 30px + 4px) 8px rgba(0,0,0,.5)) brightness(calc(1 + var(--shine, 0) * .35));
+}
+.hero2.is-crowned .laurel { animation: laurel-brillo 1.6s ease-in-out .15s 1; }
+@property --shine { syntax: "<number>"; inherits: false; initial-value: 0; }
+@keyframes laurel-brillo { 0%, 100% { --shine: 0; } 40% { --shine: 1; } }
+
+/* el aura detrás pasa de blanco a oro según se corona */
+.hero2 .hero2__photo::before { background: radial-gradient(closest-side, color-mix(in srgb, #e2b75a calc(var(--lr) * 22%), rgba(255,255,255,.12)), transparent 72%); }
+:root[data-theme="light"] .hero2 .hero2__photo::before { background: radial-gradient(closest-side, color-mix(in srgb, #c8952f calc(var(--lr) * 30%), rgba(0,0,0,.07)), transparent 70%); }
+:root[data-theme="light"] .hero2 .statue { filter: drop-shadow(0 10px 24px rgba(0,0,0,.22)); }
+
+/* la pista "toca para ver" sobra cuando ya es estatua */
+.hero2 .code-hint { opacity: calc(1 - var(--st) * 4); }
+.hero2 .code-portrait { opacity: calc(1 - var(--st)); }
+.hero2__w--1 { translate: calc(var(--s) * -5vw) 0; }
+.hero2__w--2 { translate: calc(var(--s) * 5vw) 0; }
+
+/* una sola línea de meandro griego en oro bajo el inicio */
+.tile--marquee { position: relative; }
+.tile--marquee::before {
+  content: ""; position: absolute; left: 0; right: 0; top: -1px; height: 12px; translate: 0 -100%;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='12' viewBox='0 0 24 12'%3E%3Cpath d='M0 11.5H22V.5H5V8H17V4H10' fill='none' stroke='%23e2b75a' stroke-width='1'/%3E%3C/svg%3E") repeat-x 0 0 / 24px 12px;
+  opacity: .55; pointer-events: none;
+}
+:root[data-theme="light"] .tile--marquee::before { filter: brightness(.7); }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero2 { --st: 1 !important; --lr: 1 !important; }
+  .hero2 .petrify-line { display: none; }
+  .hero-pin { height: auto; }
+  .hero-pin > .hero2 { position: relative; height: auto; min-height: 100svh; }
+}
+@media (max-width: 960px) {
+  .hero2 .hero2__photo { margin-bottom: 1.2rem; }
+  .hero2 .statue { -webkit-mask: linear-gradient(#000 60%, transparent 84%); mask: linear-gradient(#000 60%, transparent 84%); }
 }

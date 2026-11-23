@@ -20,7 +20,7 @@
 
   function color() {
     var light = document.documentElement.getAttribute('data-theme') === 'light';
-    return light ? 'rgb(140,105,30)' : 'rgb(232,200,120)';
+    return light ? 'rgb(60,60,60)' : 'rgb(235,235,235)';
   }
   var fill = color();
 

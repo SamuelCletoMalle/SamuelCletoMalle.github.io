@@ -36,7 +36,7 @@
 
   // Rampa de color según brillo: azul profundo -> cian -> blanco
   function rampColor(l) {
-    var stops = [[70, 62, 48], [168, 121, 44], [226, 183, 90], [250, 246, 232]];
+    var stops = [[60, 60, 60], [140, 140, 140], [215, 215, 215], [252, 252, 252]];
     var x = Math.min(0.999, Math.max(0, l)) * (stops.length - 1);
     var i = Math.floor(x), f = x - i, a = stops[i], b = stops[i + 1];
     return 'rgb(' + Math.round(a[0] + (b[0] - a[0]) * f) + ',' + Math.round(a[1] + (b[1] - a[1]) * f) + ',' + Math.round(a[2] + (b[2] - a[2]) * f) + ')';
@@ -48,10 +48,10 @@
   function mixColor(r, g, b, l, m) {
     if (isLight()) {
       var d = 0.42 + 0.25 * (1 - l);
-      return 'rgb(' + Math.round(r * d * 0.7 + 90 * 0.3) + ',' + Math.round(g * d * 0.7 + 64 * 0.3) + ',' + Math.round(b * d * 0.7 + 18 * 0.3) + ')';
+      var gy = Math.round((0.299 * r + 0.587 * g + 0.114 * b) * d); return 'rgb(' + gy + ',' + gy + ',' + gy + ')';
     }
     var a = rampColor(l).match(/\d+/g);
-    var k = 0.6;              // mezcla de color real y dorado
+    var k = 1;                // blanco y negro: solo la rampa de grises
     var boost = 1.35;
     return 'rgb(' + Math.min(255, Math.round((r * boost) * (1 - k) + a[0] * k)) + ',' +
       Math.min(255, Math.round((g * boost) * (1 - k) + a[1] * k)) + ',' +
@@ -259,7 +259,7 @@
     if (!reduce && alive > 0.5) {
       var sy = ((t * 70) % (H + 120)) - 60;
       var sg = ctx.createLinearGradient(0, sy - 60, 0, sy + 2);
-      sg.addColorStop(0, 'rgba(255,236,180,0)'); sg.addColorStop(1, 'rgba(255,236,180,.55)');
+      sg.addColorStop(0, 'rgba(255,255,255,0)'); sg.addColorStop(1, 'rgba(255,255,255,.5)');
       ctx.globalCompositeOperation = 'source-atop'; // solo ilumina las letras, no el fondo
       ctx.fillStyle = sg; ctx.fillRect(0, sy - 60, W, 62);
       ctx.globalCompositeOperation = 'source-over';
@@ -285,7 +285,7 @@
       glitches = glitches.filter(function (gl) {
         if (gl.until < now) return false;
         ctx.fillStyle = bg; ctx.fillRect(gl.p.hx - cw / 2, gl.p.hy - ch / 2, cw, ch);
-        ctx.fillStyle = '#fff6dc'; ctx.fillText(gl.c, gl.p.hx, gl.p.hy);
+        ctx.fillStyle = '#e2b75a'; ctx.fillText(gl.c, gl.p.hx, gl.p.hy);
         return true;
       });
     }
@@ -294,7 +294,7 @@
     if (ph < SWEEP_TIME) {
       var sy = (ph / SWEEP_TIME) * (H + 120) - 60;
       var sg = ctx.createLinearGradient(0, sy - 60, 0, sy + 2);
-      sg.addColorStop(0, 'rgba(255,236,180,0)'); sg.addColorStop(1, 'rgba(255,236,180,.55)');
+      sg.addColorStop(0, 'rgba(255,255,255,0)'); sg.addColorStop(1, 'rgba(255,255,255,.5)');
       ctx.globalCompositeOperation = 'source-atop';
       ctx.fillStyle = sg; ctx.fillRect(0, sy - 60, W, 62);
       ctx.globalCompositeOperation = 'source-over';

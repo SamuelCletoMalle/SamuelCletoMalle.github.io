@@ -10,12 +10,12 @@
 <meta property="og:description" content="Estudiante de 2º de DAM con base en sistemas y redes. Busco prácticas en proyectos IT reales.">
 <meta property="og:type" content="website">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23e2b75a'/%3E%3Ctext x='32' y='43' font-family='Arial' font-weight='800' font-size='30' text-anchor='middle' fill='%23171106'%3ESC%3C/text%3E%3C/svg%3E">
-<link rel="preload" href="assets/fonts/unbounded.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/cinzel.woff" as="font" type="font/woff" crossorigin>
 <link rel="preload" href="assets/fonts/geist.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" as="image" href="assets/foto-recorte.webp?v=1" type="image/webp" fetchpriority="high">
 <link rel="stylesheet" href="icons.css?v=1">
 <link rel="stylesheet" href="styles.css?v=21">
-<link rel="stylesheet" href="editorial.css?v=8">
+<link rel="stylesheet" href="editorial.css?v=11">
 <script>
   /* Oscuro por defecto; solo cambia si el usuario eligió claro */
   (function () {
@@ -66,7 +66,8 @@
 
 <main id="contenido">
 
-  <!-- INICIO A PANTALLA COMPLETA -->
+  <!-- INICIO A PANTALLA COMPLETA: al bajar, el retrato se convierte en estatua y llega la corona de laurel -->
+  <div class="hero-pin">
   <section class="hero2" id="inicio">
     <p class="hero2__meta hero2__meta--l" data-in><span class="status"><i class="status__dot"></i><span data-i18n="avail">Disponible para prácticas por convenio</span></span></p>
     <p class="hero2__meta hero2__meta--r mono" data-in><span data-i18n="loc">Leganés, España</span><span class="clock" id="clock" aria-label="Hora local"></span></p>
@@ -79,6 +80,9 @@
     <figure class="tile--photo hero2__photo" data-in>
       <img class="photo__img" src="assets/foto-recorte.webp?v=1" alt="Samuel Cleto Malle" width="837" height="959" fetchpriority="high">
       <figcaption class="photo__cap"><span class="photo__role" data-i18n="role">Estudiante de DAM</span></figcaption>
+      <img class="statue" src="assets/estatua-busto.webp?v=1" alt="" aria-hidden="true" width="1000" height="1094" decoding="async">
+      <i class="petrify-line" aria-hidden="true"></i>
+      <img class="laurel" src="assets/estatua-corona.webp?v=1" alt="" aria-hidden="true" width="1000" height="1094" decoding="async">
     </figure>
 
     <div class="hero2__bottom">
@@ -96,6 +100,7 @@
 
     <a class="hero2__scroll mono" href="#sobre-mi" aria-label="Bajar"><span data-i18n="scroll_k">Desliza</span><i aria-hidden="true"></i></a>
   </section>
+  </div>
 
   <!-- STACK EN MOVIMIENTO -->
   <div class="tile--marquee" aria-hidden="true">
@@ -508,9 +513,9 @@
 
 <script src="i18n.js?v=22" defer></script>
 <script src="main.js?v=20" defer></script>
-<script src="code-portrait.js?v=9" defer></script>
-<script src="code-dust.js?v=4" defer></script>
+<script src="code-portrait.js?v=10" defer></script>
+<script src="code-dust.js?v=5" defer></script>
 <script src="extras.js?v=5" defer></script>
-<script src="editorial.js?v=1" defer></script>
+<script src="editorial.js?v=3" defer></script>
 </body>
 </html>
