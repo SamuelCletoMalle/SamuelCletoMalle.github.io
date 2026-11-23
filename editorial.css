@@ -400,3 +400,16 @@ input, textarea { caret-color: var(--gold); }
   .hero2 .hero2__photo { margin-bottom: 1.2rem; }
   .hero2 .statue { -webkit-mask: linear-gradient(#000 60%, transparent 84%); mask: linear-gradient(#000 60%, transparent 84%); }
 }
+
+/* ---- botón de música (lira) ---- */
+.music { position: relative; padding: 0; color: var(--text); }
+.music svg { width: 19px; height: 19px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.music.is-on { color: var(--gold); border-color: color-mix(in srgb, var(--gold) 60%, transparent); }
+.music__eq { position: absolute; right: 7px; bottom: 7px; display: none; gap: 1.5px; align-items: flex-end; height: 8px; }
+.music.is-on .music__eq { display: flex; }
+.music__eq b { width: 2px; height: 3px; border-radius: 1px; background: var(--gold); animation: eq 1s ease-in-out infinite; }
+.music__eq b:nth-child(2) { animation-delay: -.35s; } .music__eq b:nth-child(3) { animation-delay: -.7s; }
+@keyframes eq { 50% { height: 8px; } }
+.music.is-new::after { content: ""; position: absolute; top: 5px; right: 5px; width: 7px; height: 7px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 0 0 rgba(226,183,90,.6); animation: llamada 1.8s ease-out infinite; }
+@keyframes llamada { 70%, 100% { box-shadow: 0 0 0 9px rgba(226,183,90,0); } }
+@media (prefers-reduced-motion: reduce) { .music__eq b, .music.is-new::after { animation: none; } }

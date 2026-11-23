@@ -15,7 +15,7 @@
 <link rel="preload" as="image" href="assets/foto-recorte.webp?v=1" type="image/webp" fetchpriority="high">
 <link rel="stylesheet" href="icons.css?v=1">
 <link rel="stylesheet" href="styles.css?v=21">
-<link rel="stylesheet" href="editorial.css?v=12">
+<link rel="stylesheet" href="editorial.css?v=13">
 <script>
   /* Oscuro por defecto; solo cambia si el usuario eligió claro */
   (function () {
@@ -55,6 +55,10 @@
         <option value="fr">FR</option>
         <option value="de">DE</option>
       </select>
+      <button class="chip-btn music" id="music" type="button" aria-pressed="false" aria-label="Música del Olimpo" title="Música del Olimpo">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3c-2.5 2-3 6.5-1 10.5 1.2 2.4 3.3 3.8 6 4 2.7-.2 4.8-1.6 6-4 2-4 1.5-8.5-1-10.5"/><path d="M5.5 5.5h13M9 6v11M12 6v11.5M15 6v11"/><path d="M8 21h8M12 17.5V21"/></svg>
+        <i class="music__eq" aria-hidden="true"><b></b><b></b><b></b></i>
+      </button>
       <button class="chip-btn theme" id="theme" type="button" aria-label="Tema claro u oscuro">
         <svg class="theme__sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg>
         <svg class="theme__moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg>
@@ -518,5 +522,6 @@
 <script src="code-dust.js?v=5" defer></script>
 <script src="extras.js?v=5" defer></script>
 <script src="editorial.js?v=4" defer></script>
+<script src="musica.js?v=1" defer></script>
 </body>
 </html>
