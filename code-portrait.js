@@ -35,7 +35,7 @@
 
   // Rampa de color según brillo: azul profundo -> cian -> blanco
   function rampColor(l) {
-    var stops = [[130, 38, 12], [255, 122, 45], [255, 205, 115], [255, 246, 228]];
+    var stops = [[70, 62, 48], [168, 121, 44], [226, 183, 90], [250, 246, 232]];
     var x = Math.min(0.999, Math.max(0, l)) * (stops.length - 1);
     var i = Math.floor(x), f = x - i, a = stops[i], b = stops[i + 1];
     return 'rgb(' + Math.round(a[0] + (b[0] - a[0]) * f) + ',' + Math.round(a[1] + (b[1] - a[1]) * f) + ',' + Math.round(a[2] + (b[2] - a[2]) * f) + ')';
@@ -155,7 +155,7 @@
     reveal += ((photoMode ? 1 : 0) - reveal) * (reduce ? 1 : 1 - Math.pow(0.92, sub));
 
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    ctx.fillStyle = '#0a0705';
+    ctx.fillStyle = '#070707';
     ctx.fillRect(0, 0, W, H);
 
     // Letras
@@ -189,7 +189,7 @@
           else if (p.g && Math.random() < 0.04) p.g = null;
         }
         ctx.globalAlpha = Math.min(1, 0.2 + p.l * 1.1) * alive;
-        ctx.fillStyle = p.g ? '#ffe3b0' : p.col;
+        ctx.fillStyle = p.g ? '#fff6dc' : p.col;
         ctx.fillText(p.g || p.c, p.x, p.y);
       }
     }
@@ -212,7 +212,7 @@
         ctx.arc(lens.x, lens.y, lens.r, 0, Math.PI * 2);
         ctx.lineWidth = 1.5;
         ctx.strokeStyle = 'rgba(255,255,255,.75)';
-        ctx.shadowColor = 'rgba(255,157,61,.9)'; ctx.shadowBlur = 18;
+        ctx.shadowColor = 'rgba(226,183,90,.9)'; ctx.shadowBlur = 18;
         ctx.stroke();
         ctx.shadowBlur = 0;
         var g = ctx.createRadialGradient(lens.x - lens.r * 0.35, lens.y - lens.r * 0.45, 0, lens.x, lens.y, lens.r);
@@ -225,7 +225,7 @@
     if (!reduce && alive > 0.5) {
       var sy = ((t * 70) % (H + 120)) - 60;
       var sg = ctx.createLinearGradient(0, sy - 60, 0, sy + 2);
-      sg.addColorStop(0, 'rgba(255,157,61,0)'); sg.addColorStop(1, 'rgba(255,157,61,.07)');
+      sg.addColorStop(0, 'rgba(226,183,90,0)'); sg.addColorStop(1, 'rgba(226,183,90,.07)');
       ctx.fillStyle = sg; ctx.fillRect(0, sy - 60, W, 62);
     }
 

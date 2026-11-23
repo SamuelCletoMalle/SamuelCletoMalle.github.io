@@ -12,7 +12,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23ff9d3d'/%3E%3Ctext x='32' y='43' font-family='Arial' font-weight='800' font-size='30' text-anchor='middle' fill='%231c0e03'%3ESC%3C/text%3E%3C/svg%3E">
 <link rel="preload" href="assets/fonts/unbounded.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/geist.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="styles.css?v=18">
+<link rel="stylesheet" href="styles.css?v=19">
 <script>
   /* Oscuro por defecto; solo cambia si el usuario eligió claro. Pantalla de carga salvo movimiento reducido */
   (function () {
@@ -61,6 +61,9 @@
       <a href="#stack" data-s="stack" data-i18n="nav_stack">Stack</a>
     </nav>
     <div class="nav__end">
+      <button class="chip-btn rk-btn" id="recruiter-open" type="button" title="Modo reclutador: todo en 30 segundos" aria-label="Modo reclutador: todo en 30 segundos">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"/></svg><span>30s</span>
+      </button>
       <label class="sr" for="lang" data-i18n="lang_label">Idioma</label>
       <select class="chip-btn lang" id="lang">
         <option value="es">ES</option>
@@ -399,6 +402,43 @@
         </ul>
       </article>
     </div>
+
+    <div class="play-wrap reveal">
+      <div class="play__top">
+        <p class="label" data-i18n="play_k">Juega con mi stack</p>
+        <p class="play__hint" data-i18n="play_hint">Arrastra las fichas y lánzalas</p>
+        <button class="btn btn--glass btn--sm" id="play-shake" type="button" data-i18n="play_shake">Agitar</button>
+      </div>
+      <div class="play glass" id="play" aria-label="Fichas de tecnologías que se pueden arrastrar"></div>
+    </div>
+  </section>
+
+  <!-- TERMINAL -->
+  <section class="sec wrap" id="terminal">
+    <div class="head reveal">
+      <div>
+        <p class="eyebrow" data-i18n="term_eyebrow">Pruébame</p>
+        <h2 class="split" data-i18n="term_h">Mi terminal</h2>
+      </div>
+      <p data-i18n="term_p">Escribe comandos para conocerme. Prueba <code>git log</code> para ver mi trayectoria o <code>sudo contratar</code> si te convenzo.</p>
+    </div>
+    <div class="term glass reveal">
+      <div class="term__bar"><i></i><i></i><i></i><span class="mono">samuel@portfolio: ~</span></div>
+      <div class="term__out" id="term-out" aria-live="polite"></div>
+      <form class="term__form" id="term-form" autocomplete="off">
+        <label class="sr" for="term-in" data-i18n="term_label">Comando</label>
+        <span class="t-ps" aria-hidden="true">samuel@portfolio:~$</span>
+        <input class="term__in" id="term-in" type="text" placeholder="escribe un comando…" data-i18n-ph="term_ph" spellcheck="false" autocapitalize="off" autocorrect="off" enterkeyhint="send">
+      </form>
+      <div class="term__chips">
+        <button type="button" data-term="ayuda">ayuda</button>
+        <button type="button" data-term="git log">git log</button>
+        <button type="button" data-term="java Samuel">java Samuel</button>
+        <button type="button" data-term="proyectos">proyectos</button>
+        <button type="button" data-term="ping samuel">ping samuel</button>
+        <button type="button" data-term="sudo contratar">sudo contratar</button>
+      </div>
+    </div>
   </section>
 
   <!-- PREGUNTAS -->
@@ -458,6 +498,31 @@
   </form>
 </dialog>
 
+<dialog class="rk glass" id="recruiter" aria-labelledby="rk-title">
+  <div class="rk__head">
+    <div class="rk__ring" aria-hidden="true"><span class="rk__num">30</span></div>
+    <div>
+      <p class="eyebrow" data-i18n="rk_k">Modo reclutador</p>
+      <h2 id="rk-title" data-i18n="rk_h">Samuel en 30 segundos</h2>
+    </div>
+    <button class="chip-btn rk__x" type="button" data-r-close aria-label="Cerrar">✕</button>
+  </div>
+  <div class="rk__grid">
+    <div class="rk__item"><p class="label" data-i18n="rk1_k">Quién</p><p data-i18n="rk1">Estudiante de 2º de DAM con base en sistemas y redes (SMR).</p></div>
+    <div class="rk__item"><p class="label" data-i18n="rk2_k">Busca</p><p data-i18n="rk2">Prácticas de desarrollo por convenio con Prometeo by thePower.</p></div>
+    <div class="rk__item"><p class="label" data-i18n="rk3_k">Disponible</p><p data-i18n="rk3">~4 h al día ahora · jornada completa desde marzo.</p></div>
+    <div class="rk__item"><p class="label" data-i18n="rk4_k">Zona</p><p data-i18n="rk4">Madrid sur (Leganés, Getafe). Carnet B y coche.</p></div>
+    <div class="rk__item rk__item--wide"><p class="label">Stack</p><p class="rk__chips"><b>Java</b><b>Python</b><b>JavaScript</b><b>SQL</b><b>React Native</b><b>Supabase</b><b>Git</b><b>AWS</b></p></div>
+    <div class="rk__item rk__item--wide"><p class="label" data-i18n="rk5_k">Proyecto estrella</p><p><b>Balanz</b> · <span data-i18n="rk5">app de gastos para iOS, Android y web, en producción.</span> <a href="https://balanz-app.vercel.app" target="_blank" rel="noopener" data-i18n="try_web">Probar la web</a></p></div>
+  </div>
+  <div class="rk__actions">
+    <a class="btn btn--accent btn--sm" href="assets/CV_SamuelCleto.pdf" data-r-cv><span data-i18n="cv">Descargar CV</span></a>
+    <a class="btn btn--glass btn--sm" href="#" data-r-mail><span></span></a>
+    <a class="btn btn--glass btn--sm" href="https://www.linkedin.com/in/samuelcletomalle" target="_blank" rel="noopener">LinkedIn</a>
+    <button class="rk__more" type="button" data-r-close data-i18n="rk_more">Ver el portfolio completo ↓</button>
+  </div>
+</dialog>
+
 <footer class="foot wrap">
   <p>© 2026 Samuel Cleto Malle</p>
   <button class="foot__cmd mono" id="cmdk-open" type="button"><kbd>Ctrl</kbd><kbd>K</kbd> <span data-i18n="cmd_hint">atajos</span></button>
@@ -466,7 +531,8 @@
 
 <script src="i18n.js?v=18" defer></script>
 <script src="main.js?v=18" defer></script>
-<script src="code-portrait.js?v=3" defer></script>
-<script src="code-dust.js?v=1" defer></script>
+<script src="code-portrait.js?v=4" defer></script>
+<script src="code-dust.js?v=2" defer></script>
+<script src="extras.js?v=2" defer></script>
 </body>
 </html>

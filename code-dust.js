@@ -15,7 +15,7 @@
 
   function color() {
     var light = document.documentElement.getAttribute('data-theme') === 'light';
-    return light ? [150, 80, 20] : [255, 190, 110];
+    return light ? [140, 105, 30] : [232, 200, 120];
   }
   var rgb = color();
 
