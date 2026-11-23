@@ -23,7 +23,7 @@
     'if (bug) { debug(); } else { deploy(); } while (true) { aprender(); } ';
   var GLITCH = '01{}[]()<>=+*/;:#$%&@?!';
 
-  var W = 0, H = 0, dpr = 1, cw = 8, ch = 10, cols = 0, rows = 0;
+  var W = 0, H = 0, dpr = 1, cw = 8, ch = 10, cols = 0, rows = 0, sil = null;
   var parts = [];            // partículas: una por celda con brillo suficiente
   var running = false, visible = true, raf = 0, idleTimer = 0, t0 = 0, lastT = 0;
   var mouse = { x: -9999, y: -9999, on: false };
@@ -41,11 +41,17 @@
     return 'rgb(' + Math.round(a[0] + (b[0] - a[0]) * f) + ',' + Math.round(a[1] + (b[1] - a[1]) * f) + ',' + Math.round(a[2] + (b[2] - a[2]) * f) + ')';
   }
 
-  // Color del carácter: color real de la foto con un toque del azul de la web
+  // Color del carácter: color real de la foto con un toque dorado.
+  // En tema claro se oscurece para que se lea sobre el fondo crema.
+  function isLight() { return document.documentElement.getAttribute('data-theme') === 'light'; }
   function mixColor(r, g, b, l, m) {
+    if (isLight()) {
+      var d = 0.42 + 0.25 * (1 - l);
+      return 'rgb(' + Math.round(r * d * 0.7 + 90 * 0.3) + ',' + Math.round(g * d * 0.7 + 64 * 0.3) + ',' + Math.round(b * d * 0.7 + 18 * 0.3) + ')';
+    }
     var a = rampColor(l).match(/\d+/g);
-    var k = 0.45 - 0.25 * m; // la persona conserva más su color real
-    var boost = 1.25;
+    var k = 0.6;              // mezcla de color real y dorado
+    var boost = 1.35;
     return 'rgb(' + Math.min(255, Math.round((r * boost) * (1 - k) + a[0] * k)) + ',' +
       Math.min(255, Math.round((g * boost) * (1 - k) + a[1] * k)) + ',' +
       Math.min(255, Math.round((b * boost) * (1 - k) + a[2] * k)) + ')';
@@ -81,14 +87,11 @@
     try { data = o.getImageData(0, 0, cols, rows).data; }
     catch (e) { return false; } // canvas contaminado (p. ej. abierto como file://)
 
-    // rango de brillo dentro de la zona de la persona (percentiles 5 y 97)
+    // rango de brillo de la persona (la foto viene recortada: se usa la transparencia)
     var inside = [];
-    for (var yy = 0; yy < rows; yy++) for (var xx = 0; xx < cols; xx++) {
-      var qx = (xx / cols - 0.5) / 0.32, qy = (yy / rows - 0.36) / 0.3;
-      if (qx * qx + qy * qy < 1) {
-        var j = (yy * cols + xx) * 4;
-        inside.push((0.2126 * data[j] + 0.7152 * data[j + 1] + 0.0722 * data[j + 2]) / 255);
-      }
+    for (var yy = 0; yy < rows * 0.6; yy++) for (var xx = 0; xx < cols; xx++) {
+      var j = (yy * cols + xx) * 4;
+      if (data[j + 3] > 200) inside.push((0.2126 * data[j] + 0.7152 * data[j + 1] + 0.0722 * data[j + 2]) / 255);
     }
     inside.sort(function (a, b) { return a - b; });
     var lo = inside.length ? inside[Math.floor(inside.length * 0.05)] : 0.1;
@@ -101,20 +104,18 @@
     for (var y = 0; y < rows; y++) {
       for (var x = 0; x < cols; x++) {
         var i = (y * cols + x) * 4;
+        var A = data[i + 3] / 255;
+        if (A < 0.3) continue;                                            // fuera de la silueta: nada
         var R0 = data[i], G0 = data[i + 1], B0 = data[i + 2];
         var l = (0.2126 * R0 + 0.7152 * G0 + 0.0722 * B0) / 255;
         l = Math.min(1, Math.max(0, (l - lo) / (hi - lo)));
         l = Math.pow(l, 1.25);
-        // foco en la persona: elipse sobre cabeza y hombros, el fondo queda tenue
-        var ex = (x / cols - 0.5) / 0.4, ey = (y / rows - 0.4) / 0.5;
-        var m = Math.max(0, 1 - Math.sqrt(ex * ex + ey * ey));
-        m = 0.16 + 0.84 * Math.min(1, m * 2.2);
-        var fade = Math.min(1, (rows - y) / (rows * 0.22));               // se apaga abajo, donde va el nombre
-        // dentro de la persona hay un mínimo, así el pelo y la ropa marcan la silueta
-        var core = Math.max(0, 1 - Math.sqrt(ex * ex + ey * ey) * 1.1);
-        l = Math.max(l, core > 0 ? 0.14 + 0.1 * core : 0);
-        l *= m * (0.35 + 0.65 * fade);
-        if (l < 0.06) continue;
+        var m = A;
+        var fade = Math.min(1, (rows - y) / (rows * 0.3));                // los hombros se funden abajo
+        // dentro de la silueta hay un mínimo, así el pelo y la ropa oscura se ven
+        l = Math.max(l, 0.2 * A);
+        l *= A * fade;
+        if (l < 0.05) continue;
         var hx = x * cw + cw / 2, hy = y * ch + ch / 2;
         var p = prev[k] && !reduce ? prev[k] : null;
         parts.push({
@@ -130,6 +131,16 @@
         k++;
       }
     }
+    sil = document.createElement('canvas');
+    sil.width = W * dpr; sil.height = H * dpr;
+    var sc = sil.getContext('2d');
+    sc.setTransform(dpr, 0, 0, dpr, 0, 0);
+    var crS = coverRect(img.naturalWidth, img.naturalHeight, W, H);
+    sc.drawImage(img, crS.x, crS.y, crS.w, crS.h);
+    sc.globalCompositeOperation = 'source-in';
+    sc.fillStyle = isLight() ? '#f7f6f2' : '#070707';
+    sc.fillRect(0, 0, W, H);
+
     lens.x = lens.x || W / 2; lens.y = lens.y || H * 0.35;
     return true;
   }
@@ -155,8 +166,13 @@
     reveal += ((photoMode ? 1 : 0) - reveal) * (reduce ? 1 : 1 - Math.pow(0.92, sub));
 
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    ctx.fillStyle = '#070707';
-    ctx.fillRect(0, 0, W, H);
+    ctx.clearRect(0, 0, W, H);
+    if (sil) {
+      // la silueta aparece a la vez que las letras
+      ctx.globalAlpha = Math.min(1, reduce ? 1 : t / 1.2) * 0.94;
+      ctx.drawImage(sil, 0, 0, W, H);
+      ctx.globalAlpha = 1;
+    }
 
     // Letras
     var R = lens.r * 1.35, R2 = R * R;
@@ -164,6 +180,7 @@
     ctx.font = '500 ' + fs.toFixed(1) + 'px "Geist Mono", ui-monospace, monospace';
     ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
     var alive = 1 - reveal;
+    var lightNow = isLight();
     var settled = true;
     if (alive > 0.01) {
       for (var i = 0; i < parts.length; i++) {
@@ -188,7 +205,7 @@
           if (Math.random() < 0.0016) p.g = GLITCH[(Math.random() * GLITCH.length) | 0];
           else if (p.g && Math.random() < 0.04) p.g = null;
         }
-        ctx.globalAlpha = Math.min(1, 0.2 + p.l * 1.1) * alive;
+        ctx.globalAlpha = Math.min(1, (lightNow ? 0.62 : 0.32) + p.l * 1.15) * alive;
         ctx.fillStyle = p.g ? '#fff6dc' : p.col;
         ctx.fillText(p.g || p.c, p.x, p.y);
       }
@@ -225,8 +242,10 @@
     if (!reduce && alive > 0.5) {
       var sy = ((t * 70) % (H + 120)) - 60;
       var sg = ctx.createLinearGradient(0, sy - 60, 0, sy + 2);
-      sg.addColorStop(0, 'rgba(226,183,90,0)'); sg.addColorStop(1, 'rgba(226,183,90,.07)');
+      sg.addColorStop(0, 'rgba(255,236,180,0)'); sg.addColorStop(1, 'rgba(255,236,180,.55)');
+      ctx.globalCompositeOperation = 'source-atop'; // solo ilumina las letras, no el fondo
       ctx.fillStyle = sg; ctx.fillRect(0, sy - 60, W, 62);
+      ctx.globalCompositeOperation = 'source-over';
     }
 
     var needMore = !reduce && (!settled || lens.r > 0.5 || lens.target > 0 || Math.abs(reveal - (photoMode ? 1 : 0)) > 0.002 || alive > 0.01);
@@ -296,6 +315,12 @@
   tile.addEventListener('click', toggle);
 
   new MutationObserver(setHintText).observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
+  // al cambiar de tema se recalculan los colores de las letras
+  new MutationObserver(function () {
+    if (!ready) return;
+    for (var i = 0; i < parts.length; i++) parts[i].col = null;
+    if (build()) { kick(); if (reduce) step(performance.now()); }
+  }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
 
   if ('IntersectionObserver' in window) {
     new IntersectionObserver(function (es) { visible = es[0].isIntersecting; kick(); }).observe(tile);
