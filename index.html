@@ -15,7 +15,7 @@
 <link rel="preload" as="image" href="assets/foto-recorte.webp?v=1" type="image/webp" fetchpriority="high">
 <link rel="stylesheet" href="icons.css?v=1">
 <link rel="stylesheet" href="styles.css?v=21">
-<link rel="stylesheet" href="editorial.css?v=6">
+<link rel="stylesheet" href="editorial.css?v=7">
 <script>
   /* Oscuro por defecto; solo cambia si el usuario eligió claro */
   (function () {
@@ -140,17 +140,14 @@
 
       <div class="float f1" data-speed="0.08">
         <article class="proj glass reveal">
-          <div class="proj__visual proj__visual--balanz">
-            <img src="assets/balanz-icon.webp" width="256" height="256" decoding="async" alt="Balanz" loading="lazy">
-          </div>
+          <div class="proj__visual proj__visual--blue" aria-hidden="true"><span>DAM</span></div>
           <div class="proj__body">
-            <p class="mono" data-i18n="p1_k">App móvil y web</p>
-            <h3>Balanz <span class="pill pill--on" data-i18n="live">En producción</span></h3>
-            <p data-i18n="p1_d">App de control de gastos e ingresos para iOS, Android y web con una sola base de código. Incluye sincronización en la nube, cuentas separadas por usuario y funcionamiento sin conexión.</p>
-            <p class="tech"><b>React Native</b><b>Expo</b><b>Supabase</b></p>
+            <p class="mono">Java · Oracle PL/SQL</p>
+            <h3 data-i18n="strip_t">Ejercicios y prácticas del ciclo DAM</h3>
+            <p data-i18n="strip_d">Java, bases de datos con PL/SQL y lenguajes de marcas, en GitHub.</p>
+            <p class="tech"><b>Java</b><b>Oracle PL/SQL</b><b>HTML</b><b>Git</b></p>
             <div class="proj__links">
-              <a class="btn btn--accent btn--sm" href="https://balanz-app.vercel.app" target="_blank" rel="noopener" data-i18n="try_web">Probar la web</a>
-              <a class="btn btn--glass btn--sm" href="https://github.com/SamuelCletoMalle/Balanz-App" target="_blank" rel="noopener" data-i18n="source">Código fuente</a>
+              <a class="btn btn--glass btn--sm" href="https://github.com/SamuelCletoMalle/DAM" target="_blank" rel="noopener" data-i18n="source">Código fuente</a>
             </div>
           </div>
         </article>
@@ -158,27 +155,30 @@
 
       <div class="float f2" data-speed="-0.06">
         <article class="proj glass reveal">
-          <div class="proj__visual proj__visual--teal" aria-hidden="true"><span>WEB</span></div>
+          <div class="proj__visual proj__visual--nexo">
+            <img src="assets/nexopay-icon.webp" width="256" height="256" decoding="async" alt="Nexo Pay" loading="lazy">
+          </div>
           <div class="proj__body">
-            <p class="mono" data-i18n="p2_k">Web, reservas y agente IA</p>
-            <h3 data-i18n="p2_t">Web de reservas con agente IA</h3>
-            <p data-i18n="p2_d">Web y sistema de reservas para un negocio de servicios: reserva en 4 pasos sin dobles citas, panel de administración y un chat con IA que comparte agenda con WhatsApp y voz.</p>
-            <p class="tech"><b>Next.js</b><b>React</b><b>Claude API</b></p>
+            <p class="mono"><span data-i18n="p1_k">App móvil y web</span> · v3.3</p>
+            <h3>Nexo Pay <span class="pill pill--on" data-i18n="live">En producción</span></h3>
+            <p data-i18n="p1_d">App de finanzas personales para móvil y web: movimientos, presupuestos y metas de ahorro, pagos del banco que se apuntan solos, informes en PDF, Excel y uso sin conexión. Proyecto de aprendizaje hecho junto a la IA.</p>
+            <p class="tech"><b>React Native</b><b>Expo</b><b>Supabase</b><b>SQLite</b></p>
+            <div class="proj__links">
+              <a class="btn btn--accent btn--sm" href="https://balanz-app.vercel.app" target="_blank" rel="noopener" data-i18n="try_web">Probar la web</a>
+              <a class="btn btn--glass btn--sm" href="https://github.com/SamuelCletoMalle/Nexo-Pay" target="_blank" rel="noopener" data-i18n="source">Código fuente</a>
+            </div>
           </div>
         </article>
       </div>
 
       <div class="float f3" data-speed="0.1">
         <article class="proj glass reveal">
-          <div class="proj__visual proj__visual--blue" aria-hidden="true"><span>DAM</span></div>
+          <div class="proj__visual proj__visual--teal" aria-hidden="true"><span>WEB</span></div>
           <div class="proj__body">
-            <p class="mono">GitHub</p>
-            <h3 data-i18n="strip_t">Ejercicios y prácticas del ciclo DAM</h3>
-            <p data-i18n="strip_d">Java, bases de datos con PL/SQL y lenguajes de marcas, en GitHub.</p>
-            <p class="tech"><b>Java</b><b>Oracle PL/SQL</b><b>HTML</b><b>Git</b></p>
-            <div class="proj__links">
-              <a class="btn btn--glass btn--sm" href="https://github.com/SamuelCletoMalle/DAM" target="_blank" rel="noopener" data-i18n="source">Código fuente</a>
-            </div>
+            <p class="mono" data-i18n="p2_k">Web, reservas y agente IA</p>
+            <h3 data-i18n="p2_t">Web de reservas con agente IA</h3>
+            <p data-i18n="p2_d">Web y sistema de reservas para un negocio de servicios: reserva en 4 pasos sin dobles citas, panel de administración y un chat con IA que comparte agenda con WhatsApp y voz.</p>
+            <p class="tech"><b>Next.js</b><b>React</b><b>Claude API</b></p>
           </div>
         </article>
       </div>
@@ -203,7 +203,7 @@
         <span class="now__n">02</span>
         <p class="label" data-i18n="now2_k">Aprendiendo</p>
         <h3 data-i18n="now2_t">JavaScript Essentials 2</h3>
-        <p class="card__p" data-i18n="now2_p">Y llevando Balanz de web a app nativa para publicarla en Play Store y App Store.</p>
+        <p class="card__p" data-i18n="now2_p">Y mejorando Nexo Pay, mi app de finanzas personales para Android y web.</p>
       </article>
       <article class="now__col now__col--avail reveal">
         <span class="now__n">03</span>
@@ -475,7 +475,7 @@
     <div class="rk__item"><p class="label" data-i18n="rk3_k">Disponible</p><p data-i18n="rk3">~4 h al día ahora · jornada completa desde marzo.</p></div>
     <div class="rk__item"><p class="label" data-i18n="rk4_k">Zona</p><p data-i18n="rk4">Madrid sur (Leganés, Getafe). Carnet B y coche.</p></div>
     <div class="rk__item rk__item--wide"><p class="label">Stack</p><p class="rk__chips"><b>Java</b><b>Python</b><b>JavaScript</b><b>SQL</b><b>React Native</b><b>Supabase</b><b>Git</b><b>AWS</b></p></div>
-    <div class="rk__item rk__item--wide"><p class="label" data-i18n="rk5_k">Proyecto estrella</p><p><b>Balanz</b> · <span data-i18n="rk5">app de gastos para iOS, Android y web, en producción.</span> <a href="https://balanz-app.vercel.app" target="_blank" rel="noopener" data-i18n="try_web">Probar la web</a></p></div>
+    <div class="rk__item rk__item--wide"><p class="label" data-i18n="rk5_k">Proyecto personal</p><p><b>Nexo Pay</b> · <span data-i18n="rk5">app de finanzas para Android y web, hecha aprendiendo junto a la IA.</span> <a href="https://balanz-app.vercel.app" target="_blank" rel="noopener" data-i18n="try_web">Probar la web</a></p></div>
   </div>
   <div class="rk__actions">
     <a class="btn btn--accent btn--sm" href="assets/CV_SamuelCleto.pdf" data-r-cv><span data-i18n="cv">Descargar CV</span></a>
@@ -491,11 +491,11 @@
   <a href="#inicio" data-i18n="top">Volver arriba</a>
 </footer>
 
-<script src="i18n.js?v=20" defer></script>
+<script src="i18n.js?v=21" defer></script>
 <script src="main.js?v=20" defer></script>
 <script src="code-portrait.js?v=9" defer></script>
 <script src="code-dust.js?v=4" defer></script>
-<script src="extras.js?v=3" defer></script>
+<script src="extras.js?v=4" defer></script>
 <script src="editorial.js?v=1" defer></script>
 </body>
 </html>

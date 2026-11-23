@@ -131,9 +131,9 @@
       },
       proyectos: function () {
         return [
-          ['<span class="t-gold">●</span> <b>Balanz</b> — ' + tr('app de gastos e ingresos (React Native + Supabase). ', 'expense tracker (React Native + Supabase). ') + '<a href="https://balanz-app.vercel.app" target="_blank" rel="noopener">' + tr('probar', 'try it') + ' ↗</a>'],
-          ['<span class="t-gold">●</span> <b>' + tr('Web de reservas con IA', 'Booking site with AI') + '</b> — ' + tr('reservas en 4 pasos y chat con IA.', '4-step booking and AI chat.')],
-          ['<span class="t-gold">●</span> <b>DAM</b> — ' + tr('ejercicios del ciclo en Java y PL/SQL. ', 'course exercises in Java and PL/SQL. ') + '<a href="' + GITHUB + '/DAM" target="_blank" rel="noopener">GitHub ↗</a>']
+          ['<span class="t-gold">●</span> <b>DAM</b> — ' + tr('ejercicios del ciclo en Java y PL/SQL. ', 'course exercises in Java and PL/SQL. ') + '<a href="' + GITHUB + '/DAM" target="_blank" rel="noopener">GitHub ↗</a>'],
+          ['<span class="t-gold">●</span> <b>Nexo Pay</b> — ' + tr('app de finanzas personales (React Native + Supabase), hecha aprendiendo con IA. ', 'personal finance app (React Native + Supabase), built while learning with AI. ') + '<a href="https://balanz-app.vercel.app" target="_blank" rel="noopener">' + tr('probar', 'try it') + ' ↗</a>'],
+          ['<span class="t-gold">●</span> <b>' + tr('Web de reservas con IA', 'Booking site with AI') + '</b> — ' + tr('reservas en 4 pasos y chat con IA.', '4-step booking and AI chat.')]
         ];
       },
       stack: function () {
