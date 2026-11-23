@@ -413,3 +413,5 @@ input, textarea { caret-color: var(--gold); }
 .music.is-new::after { content: ""; position: absolute; top: 5px; right: 5px; width: 7px; height: 7px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 0 0 rgba(226,183,90,.6); animation: llamada 1.8s ease-out infinite; }
 @keyframes llamada { 70%, 100% { box-shadow: 0 0 0 9px rgba(226,183,90,0); } }
 @media (prefers-reduced-motion: reduce) { .music__eq b, .music.is-new::after { animation: none; } }
+.music.is-loading svg { animation: cargando 1s ease-in-out infinite; }
+@keyframes cargando { 50% { opacity: .35; } }
