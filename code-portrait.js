@@ -25,7 +25,7 @@
 
   var W = 0, H = 0, dpr = 1, cw = 8, ch = 10, cols = 0, rows = 0;
   var parts = [];            // partículas: una por celda con brillo suficiente
-  var running = false, visible = true, raf = 0, idleTimer = 0, t0 = 0;
+  var running = false, visible = true, raf = 0, idleTimer = 0, t0 = 0, lastT = 0;
   var mouse = { x: -9999, y: -9999, on: false };
   var lens = { x: 0, y: 0, r: 0, target: 0 };
   var photoMode = false;      // true = foto completa
@@ -138,18 +138,21 @@
     raf = 0;
     if (!t0) t0 = now;
     var t = (now - t0) / 1000;
+    // pasos de física según el tiempo real (si el dispositivo va lento, se hacen varios por fotograma)
+    var sub = lastT ? Math.max(1, Math.min(4, Math.round((now - lastT) / 16.7))) : 1;
+    lastT = now;
 
     // Lupa: sigue al ratón; en táctil, deriva sola tras un rato sin tocar
     var auto = touch && now - lastMove > 2500;
-    if (mouse.on) { lens.x += (mouse.x - lens.x) * 0.25; lens.y += (mouse.y - lens.y) * 0.25; lens.target = Math.min(W, H) * 0.2; }
+    if (mouse.on) { var e = 1 - Math.pow(0.75, sub); lens.x += (mouse.x - lens.x) * e; lens.y += (mouse.y - lens.y) * e; lens.target = Math.min(W, H) * 0.2; }
     else if (auto && !reduce) {
       lens.x = W * (0.5 + 0.28 * Math.sin(t * 0.55));
       lens.y = H * (0.36 + 0.16 * Math.sin(t * 0.9 + 1));
       lens.target = Math.min(W, H) * 0.15;
     } else lens.target = 0;
-    lens.r += (lens.target - lens.r) * 0.18;
+    lens.r += (lens.target - lens.r) * (1 - Math.pow(0.82, sub));
 
-    reveal += ((photoMode ? 1 : 0) - reveal) * (reduce ? 1 : 0.08);
+    reveal += ((photoMode ? 1 : 0) - reveal) * (reduce ? 1 : 1 - Math.pow(0.92, sub));
 
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     ctx.fillStyle = '#05070f';
@@ -168,16 +171,18 @@
         if (!reduce) {
           var tt = t - p.d;
           if (tt < 0) { settled = false; continue; }
-          var ax = (p.hx - p.x) * 0.055, ay = (p.hy - p.y) * 0.055;
-          if (lens.r > 2) {
-            var dx = p.x - lens.x, dy = p.y - lens.y, d2 = dx * dx + dy * dy;
-            if (d2 < R2 && d2 > 0.01) {
-              var d = Math.sqrt(d2), f = (1 - d / R) * 7.5;
-              ax += dx / d * f; ay += dy / d * f;
+          for (var n = 0; n < sub; n++) {
+            var ax = (p.hx - p.x) * 0.055, ay = (p.hy - p.y) * 0.055;
+            if (lens.r > 2) {
+              var dx = p.x - lens.x, dy = p.y - lens.y, d2 = dx * dx + dy * dy;
+              if (d2 < R2 && d2 > 0.01) {
+                var d = Math.sqrt(d2), f = (1 - d / R) * 7.5;
+                ax += dx / d * f; ay += dy / d * f;
+              }
             }
+            p.vx = (p.vx + ax) * 0.8; p.vy = (p.vy + ay) * 0.8;
+            p.x += p.vx; p.y += p.vy;
           }
-          p.vx = (p.vx + ax) * 0.8; p.vy = (p.vy + ay) * 0.8;
-          p.x += p.vx; p.y += p.vy;
           if (Math.abs(p.vx) + Math.abs(p.vy) > 0.05) settled = false;
           // parpadeo: alguna letra cambia de vez en cuando
           if (Math.random() < 0.0016) p.g = GLITCH[(Math.random() * GLITCH.length) | 0];
@@ -227,6 +232,7 @@
     var needMore = !reduce && (!settled || lens.r > 0.5 || lens.target > 0 || Math.abs(reveal - (photoMode ? 1 : 0)) > 0.002 || alive > 0.01);
     if (needMore && running && visible) {
       var idle = settled && lens.r < 0.5 && lens.target === 0 && Math.abs(reveal - (photoMode ? 1 : 0)) < 0.002;
+      if (idle) lastT = 0;
       if (idle) idleTimer = setTimeout(function () { idleTimer = 0; kick(); }, 90); // en reposo basta con ~11 fps para el parpadeo
       else raf = requestAnimationFrame(step);
     }
@@ -235,6 +241,7 @@
   function kick() {
     if (!running || !visible || raf) return;
     if (idleTimer) { clearTimeout(idleTimer); idleTimer = 0; } // sal del modo reposo al momento
+    if (!visible) lastT = 0;
     raf = requestAnimationFrame(step);
   }
 
