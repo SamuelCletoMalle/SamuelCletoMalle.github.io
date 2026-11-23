@@ -335,12 +335,11 @@ input, textarea { caret-color: var(--gold); }
 }
 .hero2 .statue {
   z-index: 3;
-  clip-path: inset(calc((1 - var(--st)) * 100%) 0 0 0);
   -webkit-mask: linear-gradient(#000 74%, transparent 96%); mask: linear-gradient(#000 74%, transparent 96%);
 }
 .hero2 .petrify-line {
-  position: absolute; left: -8%; right: -8%; z-index: 4; height: 2px;
-  top: calc(-.72% + (1 - var(--st)) * 115%);
+  position: absolute; left: -8%; right: -8%; z-index: 6; height: 2px;
+  top: calc(-.72% + (1 - var(--st)) * 129%);
   background: linear-gradient(90deg, transparent, var(--gold) 20%, #fff3c4 50%, var(--gold) 80%, transparent);
   box-shadow: 0 0 18px 2px rgba(226,183,90,.55);
   opacity: calc(min(var(--st) * 8, 1) * min((1 - var(--st)) * 8, 1));
@@ -353,6 +352,10 @@ input, textarea { caret-color: var(--gold); }
   opacity: .8;
 }
 
+/* 1: la piedra sube y deja ver la versión a medio petrificar
+   2: la cara termina de convertirse en mármol (fundido) */
+.hero2 .statue--half { clip-path: inset(calc((1 - var(--st)) * 100%) 0 0 0); }
+.hero2 .statue--stone { z-index: 4; opacity: var(--sp); }
 /* la corona de laurel de oro baja y se posa en la cabeza */
 .hero2 .laurel {
   z-index: 5;
@@ -388,7 +391,7 @@ input, textarea { caret-color: var(--gold); }
 :root[data-theme="light"] .tile--marquee::before { filter: brightness(.7); }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero2 { --st: 1 !important; --lr: 1 !important; }
+  .hero2 { --st: 1 !important; --sp: 1 !important; --lr: 1 !important; }
   .hero2 .petrify-line { display: none; }
   .hero-pin { height: auto; }
   .hero-pin > .hero2 { position: relative; height: auto; min-height: 100svh; }
