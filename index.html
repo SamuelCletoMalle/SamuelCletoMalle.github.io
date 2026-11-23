@@ -15,7 +15,7 @@
 <link rel="preload" as="image" href="assets/foto-recorte.webp?v=1" type="image/webp" fetchpriority="high">
 <link rel="stylesheet" href="icons.css?v=1">
 <link rel="stylesheet" href="styles.css?v=21">
-<link rel="stylesheet" href="editorial.css?v=7">
+<link rel="stylesheet" href="editorial.css?v=8">
 <script>
   /* Oscuro por defecto; solo cambia si el usuario eligió claro */
   (function () {
@@ -140,21 +140,6 @@
 
       <div class="float f1" data-speed="0.08">
         <article class="proj glass reveal">
-          <div class="proj__visual proj__visual--blue" aria-hidden="true"><span>DAM</span></div>
-          <div class="proj__body">
-            <p class="mono">Java · Oracle PL/SQL</p>
-            <h3 data-i18n="strip_t">Ejercicios y prácticas del ciclo DAM</h3>
-            <p data-i18n="strip_d">Java, bases de datos con PL/SQL y lenguajes de marcas, en GitHub.</p>
-            <p class="tech"><b>Java</b><b>Oracle PL/SQL</b><b>HTML</b><b>Git</b></p>
-            <div class="proj__links">
-              <a class="btn btn--glass btn--sm" href="https://github.com/SamuelCletoMalle/DAM" target="_blank" rel="noopener" data-i18n="source">Código fuente</a>
-            </div>
-          </div>
-        </article>
-      </div>
-
-      <div class="float f2" data-speed="-0.06">
-        <article class="proj glass reveal">
           <div class="proj__visual proj__visual--nexo">
             <img src="assets/nexopay-icon.webp" width="256" height="256" decoding="async" alt="Nexo Pay" loading="lazy">
           </div>
@@ -171,7 +156,37 @@
         </article>
       </div>
 
+      <div class="float f2" data-speed="-0.06">
+        <article class="proj glass reveal">
+          <div class="proj__visual proj__visual--crm">
+            <img src="assets/crmforge-icon.webp" width="256" height="256" decoding="async" alt="CRMForge" loading="lazy">
+          </div>
+          <div class="proj__body">
+            <p class="mono" data-i18n="crm_k">Web SaaS · CRM a medida</p>
+            <h3>CRMForge <span class="pill" data-i18n="crm_st">En desarrollo</span></h3>
+            <p data-i18n="crm_d">Constructor de CRM a medida: cada empresa monta el suyo con módulos, campos y vistas propias. Permisos por rol en la base de datos, equipos con invitación, automatizaciones, informes e importación CSV.</p>
+            <p class="tech"><b>Next.js</b><b>React</b><b>Supabase</b><b>PostgreSQL</b><b>Tailwind</b></p>
+            <p class="proj__note mono" data-i18n="crm_n">15 migraciones SQL · 232 pruebas automáticas · repositorio privado</p>
+          </div>
+        </article>
+      </div>
+
       <div class="float f3" data-speed="0.1">
+        <article class="proj glass reveal">
+          <div class="proj__visual proj__visual--blue" aria-hidden="true"><span>DAM</span></div>
+          <div class="proj__body">
+            <p class="mono">Java · Oracle PL/SQL</p>
+            <h3 data-i18n="strip_t">Ejercicios y prácticas del ciclo DAM</h3>
+            <p data-i18n="strip_d">Java, bases de datos con PL/SQL y lenguajes de marcas, en GitHub.</p>
+            <p class="tech"><b>Java</b><b>Oracle PL/SQL</b><b>HTML</b><b>Git</b></p>
+            <div class="proj__links">
+              <a class="btn btn--glass btn--sm" href="https://github.com/SamuelCletoMalle/DAM" target="_blank" rel="noopener" data-i18n="source">Código fuente</a>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="float f4" data-speed="-0.04">
         <article class="proj glass reveal">
           <div class="proj__visual proj__visual--teal" aria-hidden="true"><span>WEB</span></div>
           <div class="proj__body">
@@ -475,7 +490,7 @@
     <div class="rk__item"><p class="label" data-i18n="rk3_k">Disponible</p><p data-i18n="rk3">~4 h al día ahora · jornada completa desde marzo.</p></div>
     <div class="rk__item"><p class="label" data-i18n="rk4_k">Zona</p><p data-i18n="rk4">Madrid sur (Leganés, Getafe). Carnet B y coche.</p></div>
     <div class="rk__item rk__item--wide"><p class="label">Stack</p><p class="rk__chips"><b>Java</b><b>Python</b><b>JavaScript</b><b>SQL</b><b>React Native</b><b>Supabase</b><b>Git</b><b>AWS</b></p></div>
-    <div class="rk__item rk__item--wide"><p class="label" data-i18n="rk5_k">Proyecto personal</p><p><b>Nexo Pay</b> · <span data-i18n="rk5">app de finanzas para Android y web, hecha aprendiendo junto a la IA.</span> <a href="https://balanz-app.vercel.app" target="_blank" rel="noopener" data-i18n="try_web">Probar la web</a></p></div>
+    <div class="rk__item rk__item--wide"><p class="label" data-i18n="rk5_k">Proyectos personales</p><p data-i18n="rk5">Nexo Pay (app de finanzas, en producción) y CRMForge (constructor de CRM a medida, en desarrollo).</p></div>
   </div>
   <div class="rk__actions">
     <a class="btn btn--accent btn--sm" href="assets/CV_SamuelCleto.pdf" data-r-cv><span data-i18n="cv">Descargar CV</span></a>
@@ -491,11 +506,11 @@
   <a href="#inicio" data-i18n="top">Volver arriba</a>
 </footer>
 
-<script src="i18n.js?v=21" defer></script>
+<script src="i18n.js?v=22" defer></script>
 <script src="main.js?v=20" defer></script>
 <script src="code-portrait.js?v=9" defer></script>
 <script src="code-dust.js?v=4" defer></script>
-<script src="extras.js?v=4" defer></script>
+<script src="extras.js?v=5" defer></script>
 <script src="editorial.js?v=1" defer></script>
 </body>
 </html>

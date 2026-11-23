@@ -154,9 +154,13 @@ window.I18N = {
     "rk3": "~4 h a day now · full time from March.",
     "rk4_k": "Area",
     "rk4": "South Madrid (Leganés, Getafe). Driving licence and car.",
-    "rk5_k": "Personal project",
-    "rk5": "finance app for Android and web, built while learning alongside AI.",
-    "rk_more": "See the full portfolio ↓"
+    "rk5_k": "Personal projects",
+    "rk5": "Nexo Pay (finance app, in production) and CRMForge (custom CRM builder, in development).",
+    "rk_more": "See the full portfolio ↓",
+    "crm_k": "Web SaaS · custom CRM",
+    "crm_st": "In development",
+    "crm_d": "A builder for custom CRMs: each company sets up its own with modules, fields and views. Role permissions enforced in the database, teams with invites, automations, reports and CSV import.",
+    "crm_n": "15 SQL migrations · 232 automated tests · private repository"
   },
   "fr": {
     "skip": "Aller au contenu",
@@ -312,9 +316,13 @@ window.I18N = {
     "rk3": "~4 h par jour maintenant · temps plein dès mars.",
     "rk4_k": "Zone",
     "rk4": "Sud de Madrid (Leganés, Getafe). Permis B et voiture.",
-    "rk5_k": "Projet personnel",
-    "rk5": "application de finances pour Android et web, réalisée en apprenant avec l'IA.",
-    "rk_more": "Voir tout le portfolio ↓"
+    "rk5_k": "Projets personnels",
+    "rk5": "Nexo Pay (app de finances, en production) et CRMForge (constructeur de CRM, en développement).",
+    "rk_more": "Voir tout le portfolio ↓",
+    "crm_k": "Web SaaS · CRM sur mesure",
+    "crm_st": "En développement",
+    "crm_d": "Un constructeur de CRM sur mesure : chaque entreprise crée le sien avec ses modules, champs et vues. Permissions par rôle dans la base de données, équipes sur invitation, automatisations, rapports et import CSV.",
+    "crm_n": "15 migrations SQL · 232 tests automatisés · dépôt privé"
   },
   "de": {
     "skip": "Zum Inhalt springen",
@@ -470,8 +478,12 @@ window.I18N = {
     "rk3": "Jetzt ~4 Std. täglich · Vollzeit ab März.",
     "rk4_k": "Gebiet",
     "rk4": "Süden von Madrid (Leganés, Getafe). Führerschein und Auto.",
-    "rk5_k": "Eigenes Projekt",
-    "rk5": "Finanz-App für Android und Web, beim Lernen mit KI entstanden.",
-    "rk_more": "Ganzes Portfolio ansehen ↓"
+    "rk5_k": "Eigene Projekte",
+    "rk5": "Nexo Pay (Finanz-App, im Einsatz) und CRMForge (CRM-Baukasten, in Entwicklung).",
+    "rk_more": "Ganzes Portfolio ansehen ↓",
+    "crm_k": "Web-SaaS · CRM nach Maß",
+    "crm_st": "In Entwicklung",
+    "crm_d": "Ein Baukasten für maßgeschneiderte CRMs: Jedes Unternehmen baut sein eigenes mit Modulen, Feldern und Ansichten. Rollenrechte direkt in der Datenbank, Teams per Einladung, Automatisierungen, Berichte und CSV-Import.",
+    "crm_n": "15 SQL-Migrationen · 232 automatische Tests · privates Repository"
   }
 };

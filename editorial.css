@@ -103,14 +103,22 @@ a { text-underline-offset: .2em; }
 .stage__word { position: absolute; inset: 0; z-index: 0; pointer-events: none; display: flex; justify-content: center; overflow: clip; }
 .stage__word span { position: sticky; top: 18vh; height: max-content; font: 800 clamp(8rem, 30vw, 27rem)/.8 var(--display); letter-spacing: -.07em; color: color-mix(in srgb, var(--accent) 5%, transparent); -webkit-text-stroke: 1.5px color-mix(in srgb, var(--accent) 55%, transparent); opacity: .45; }
 .float { --py: 0px; position: relative; z-index: 1; translate: 0 var(--py); }
+/* 4 tarjetas en zigzag: las dos destacadas arriba, las otras dos debajo y más pequeñas */
+.stage { row-gap: 0; }
 .f1 { grid-column: 1 / 8; grid-row: 1; }
-.f2 { grid-column: 8 / 13; grid-row: 1; margin-top: 18rem; }
-.f3 { grid-column: 3 / 9; grid-row: 2; margin-top: 4rem; }
+.f2 { grid-column: 8 / 13; grid-row: 1; margin-top: 14rem; }
+.f3 { grid-column: 2 / 7; grid-row: 2; margin-top: 4rem; }
+.f4 { grid-column: 7 / 12; grid-row: 2; margin-top: 12rem; }
 .f1 .proj__visual { height: 320px; }
-.f3 .proj__visual { height: 200px; }
+.f2 .proj__visual { height: 230px; }
+.f3 .proj__visual, .f4 .proj__visual { height: 170px; }
 .proj__visual--nexo { height: 190px; background: radial-gradient(60% 75% at 50% 45%, rgba(124, 134, 255, .28), #08080a 72%); }
 .proj__visual--nexo img { width: 132px; border-radius: 26%; box-shadow: 0 24px 50px -18px rgba(124, 134, 255, .55); transition: transform .8s var(--ease); }
-.proj:hover .proj__visual--nexo img { transform: scale(1.06) rotate(-3deg); }
+.f1 .proj__visual--nexo img { width: 190px; }
+.proj__visual--crm { background: radial-gradient(60% 75% at 50% 45%, rgba(91, 108, 255, .3), #0b0f1f 72%); }
+.proj__visual--crm img { width: 116px; border-radius: 26%; box-shadow: 0 24px 50px -18px rgba(91, 108, 255, .6); transition: transform .8s var(--ease); }
+.proj:hover .proj__visual--nexo img, .proj:hover .proj__visual--crm img { transform: scale(1.06) rotate(-3deg); }
+.proj__note { margin-top: .9rem; padding-top: .9rem; border-top: 1px dashed var(--chip-line); font-size: .74rem; }
 .float .proj { --g-blur: 10px; --g-solid: color-mix(in srgb, var(--bg) 55%, transparent); }
 
 /* ---------- Ahora mismo: columnas sin cajas ---------- */
