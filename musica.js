@@ -1,6 +1,5 @@
 /* Música del Olimpo: "Temple Ambient" en bucle, bajita.
-   - Empieza apagada; se activa con el botón de la lira.
-   - El archivo solo se descarga cuando alguien la enciende.
+   - Arranca sola (o con el primer clic si el navegador lo bloquea); el botón de la lira la para.
    - Se reproduce con Web Audio para que el bucle no tenga cortes.
    - Cuando la corona de laurel se posa en la estatua suenan unas campanas suaves. */
 (function () {
@@ -61,20 +60,22 @@
   function saved() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
 
   btn.addEventListener('click', function () {
-    btn.classList.remove('is-new');
     if (playing) { stop(); save(false); } else { start(); save(true); }
   });
-  if (saved() === null) btn.classList.add('is-new');
 
-  // si la dejó encendida, vuelve a sonar con el primer toque o tecla (los navegadores lo exigen)
-  if (saved() === '1') {
-    var resume = function (e) {
-      if (e.target && e.target.closest && e.target.closest('#music')) return;
-      ['pointerdown', 'keydown'].forEach(function (n) { window.removeEventListener(n, resume, true); });
-      if (!playing) start();
+  // arranca sola. Si el navegador bloquea el sonido sin interacción,
+  // empieza en el primer clic, toque o tecla del visitante (salvo que antes la apagara).
+  function autostart() {
+    start();
+    if (ctx.state === 'running') return;
+    var go = function (e) {
+      ['pointerdown', 'touchend', 'keydown', 'click'].forEach(function (n) { window.removeEventListener(n, go, true); });
+      if (e.target && e.target.closest && e.target.closest('#music')) return; // el botón ya decide
+      if (playing) { ctx.resume(); } else { start(); }
     };
-    ['pointerdown', 'keydown'].forEach(function (n) { window.addEventListener(n, resume, true); });
+    ['pointerdown', 'touchend', 'keydown', 'click'].forEach(function (n) { window.addEventListener(n, go, true); });
   }
+  if (saved() !== '0') autostart();
 
   // con la pestaña oculta se pausa
   document.addEventListener('visibilitychange', function () {
